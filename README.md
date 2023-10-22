@@ -1,4 +1,4 @@
-# Project Proposal and Deliverables Timeline for Music Recommendation App
+# Music Recommendation App
 
 ## Project Summary:
 
@@ -53,3 +53,5 @@ Database:
 7. Tag
 8. ImpressionStats
 9. UserStats
+
+Due to size constraints, we've stored our datasets on Google Drive. Access the datasets using your Yale account [at this link](https://drive.google.com/drive/folders/1Y0rKHs0sMmie-0wBxS__c0QH3HWUgug_?usp=sharing).
