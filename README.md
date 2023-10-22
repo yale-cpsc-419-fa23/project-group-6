@@ -25,17 +25,31 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 - Front-end visualization for album art.
 
 ### 3. Optional Deliverable: Recommendation System Enhancement (Due: Nov 26)
-- Further refinement in recommendation algorithms
-- Deploy the algorithm into the backend
+- Optimization of the recommendation engine for faster and more accurate results.
 
 ### 4. Beta Version (Due: Dec 1)
-- Personalized recommendations with preliminary algorithms.
+- Fully functional music recommendation engine, equipped to produce daily mixes.
 - Introduction of the Like and Dislike system.
 - Top played list integration for daily, weekly, monthly statistics.
-- Basic back-end analytics for tracking user interactions.
+- Introduction of the Connect & Collaborate features.
+
 
 ### 5. Final Version (Due: Dec 5)
-- Fully functional music recommendation engine with daily mixes.
-- Complete front-end with top played lists and filters
-- Comprehensive back-end with user account management, database integrity checks, and advanced analytics.
-- Connect & Collaborate features activated for user interactions.
+- Rectification of bugs and glitches identified during the beta phase.
+- Enhancement of the front-end for smoother user experiences and more intuitive interfaces.
+- Strengthening of the back-end with advanced analytics, database integrity checks, and reliability measures.
+- Conducting extensive tests to ensure stability during novel user interactions.
+
+
+#### MISCELLANEOUS
+
+Database:
+1. User
+2. Music
+3. User-Music (Create)
+4. User-Music (Like)
+5. User-User (Follow/Friend?)
+6. Music-Tag
+7. Tag
+8. ImpressionStats
+9. UserStats
