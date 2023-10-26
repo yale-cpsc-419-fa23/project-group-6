@@ -43,7 +43,7 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 
 #### MISCELLANEOUS
 
-Database:
+##### Database:
 1. User
 2. Music
 3. User-Music (Create)
@@ -55,3 +55,35 @@ Database:
 9. UserStats
 
 Due to size constraints, we've stored our datasets on Google Drive. Access the datasets using your Yale account [at this link](https://drive.google.com/drive/folders/1Y0rKHs0sMmie-0wBxS__c0QH3HWUgug_?usp=sharing).
+
+##### Project Structure:
+```
+/music_recommendation_mvc
+|-- /app
+|   |-- __init__.py
+|   |-- /models
+|   |   |-- __init__.py
+|   |   |-- song.py
+|   |-- /views
+|   |   |-- __init__.py
+|   |   |-- base.html
+|   |   |-- index.html
+|   |   |-- upload.html
+|   |   |-- recommendations.html
+|   |-- /controllers
+|   |   |-- __init__.py
+|   |   |-- main_controller.py
+|   |   |-- upload_controller.py
+|   |   |-- recommendation_controller.py
+|   |-- /static
+|   |   |-- /css
+|   |   |-- /js
+|   |   |-- /uploads
+|   |-- /utils
+|   |   |-- __init__.py
+|   |   |-- recommendation_utils.py
+|   |-- config.py
+|-- run.py
+|-- requirements.txt
+
+```
