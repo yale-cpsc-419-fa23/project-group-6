@@ -54,7 +54,7 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 8. ImpressionStats
 9. UserStats
 
-Due to size constraints, we've stored our datasets on Google Drive. Access the datasets using your Yale account [at this link](https://drive.google.com/drive/folders/1Y0rKHs0sMmie-0wBxS__c0QH3HWUgug_?usp=sharing).
+Due to size constraints, we've stored our datasets on Google Drive. Access the datasets using your Yale account [at this link](https://drive.google.com/drive/folders/1Y0rKHs0sMmie-0wBxS__c0QH3HWUgug_?usp=sharing). (Uploaded sqlite database for MVP Release)
 
 ##### Project Structure:
 ```
@@ -63,7 +63,6 @@ Due to size constraints, we've stored our datasets on Google Drive. Access the d
 |   |-- __init__.py
 |   |-- /models
 |   |   |-- __init__.py
-|   |   |-- song.py
 |   |-- /views
 |   |   |-- __init__.py
 |   |   |-- base.html
