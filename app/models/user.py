@@ -1,10 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from app import db, create_app
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../music_data.sqlite'
-db = SQLAlchemy(app)
 
 class User(db.Model):
     userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -19,8 +15,11 @@ class User(db.Model):
         return f"<User {self.username}>"
 
     @classmethod
-    def create(cls, username, password, email, gender, birthday):
-        new_user = cls(username=username, password=password, email=email, gender=gender, birthday=birthday, registerdDateTime=datetime())
+    def create(cls, username, password, email, gender = None, birthday = None):
+        if cls.find_by_email(email) is not None:
+            raise ValueError("Email already exists!")
+        new_user = cls(username=username, password=password, email=email, gender=gender, birthday=birthday,
+                       registeredDateTime=datetime.now())
         db.session.add(new_user)
         db.session.commit()
         return new_user
@@ -57,6 +56,9 @@ class User(db.Model):
 
 
 if __name__ == "__main__":
+    app = create_app('DevelopmentConfig')
     with app.app_context():
         U = User()
         print(U.find_by_id(100))
+        print(U.create("test", "test", "test@example.com"))
+
