@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from app import db, create_app
 
 
@@ -13,6 +14,9 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+    
+    def check_password(self, password):
+        return self.password == password
 
     @classmethod
     def create(cls, username, password, email, gender = None, birthday = None):

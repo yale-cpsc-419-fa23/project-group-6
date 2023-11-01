@@ -1,17 +1,21 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-# from flask_login import LoginManager
 
 
 db = SQLAlchemy()
 def create_app(config_name):
-    app = Flask(__name__, template_folder='app/views')
+    app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
+    app.config['SECRET_KEY'] = '519'
+
     # Load configurations from config.py
     app.config.from_object(f"app.config.{config_name}")
-    # Initialize extensions with app
     db.init_app(app)
 
-    # login_manager = LoginManager(app)
-    # login_manager.login_view = 'login'
+    # Registering blueprints
+    from app.controllers import auth_controller
+    app.register_blueprint(auth_controller.auth)
+
+    from app.controllers import main_controller
+    app.register_blueprint(main_controller.main)
 
     return app
