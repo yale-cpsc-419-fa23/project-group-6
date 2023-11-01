@@ -37,7 +37,7 @@ class User(db.Model):
         return db.session.get(cls, user_id)
 
     @classmethod
-    def alter(cls, user_id, username, password, email, gender, birthday):
+    def alter_by_id(cls, user_id, username, password, email, gender, birthday):
         user = db.session.get(cls, user_id)
         if not user:
             return None
@@ -60,5 +60,8 @@ if __name__ == "__main__":
     with app.app_context():
         U = User()
         print(U.find_by_id(100))
-        print(U.create("test", "test", "test@example.com"))
+        # print(U.create("test", "test", "test@example.com"))
+        print(U.find_by_email("test@example.com").userId)
+
+
 
