@@ -41,3 +41,8 @@
 #search-results p:hover {
     background-color: #808080;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between; 
+}

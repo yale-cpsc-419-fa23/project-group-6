@@ -2,10 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
+UPLOAD_FOLDER = 'app/uploads/'  # You might need to adjust this based on your app's structure.
+
 db = SQLAlchemy()
 def create_app(config_name):
     app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
     app.config['SECRET_KEY'] = '519'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # Load configurations from config.py
     app.config.from_object(f"app.config.{config_name}")

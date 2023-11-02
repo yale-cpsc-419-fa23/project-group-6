@@ -1,7 +1,11 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template, redirect, flash, current_app, url_for
+from werkzeug.utils import secure_filename
+import os
 
 from app.models.song import Song
 
+
+ALLOWED_EXTENSIONS = {'mp3', 'wav', 'flac'}
 
 music = Blueprint('music', __name__)
 
@@ -23,3 +27,46 @@ def search():
         } for song in songs]
 
     return jsonify(songs_json)
+
+@music.route('/upload_song', methods=['GET'])
+def upload_song():
+    return render_template('upload.html')
+
+@music.route('/save_song', methods=['POST'])
+def save_song():
+    def allowed_file(filename):
+        return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    
+    # Check if the post request has the file part
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    # If user does not select file, browser might submit an empty part without filename
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        
+        # Extract features from song
+        # features = audio_feature_extractor(file_path)
+        features = {}
+        song_details = {
+            "name": request.form['name'],
+            "filepath": file_path
+        }
+        song_data = {**song_details, **features}
+        
+        with current_app.app_context():
+            # Add the song to the database
+            song = Song.create(**song_data)
+        
+        flash('File successfully uploaded')
+        return redirect(url_for('main.home'))
+    else:
+        flash('Allowed file types are mp3, wav, and flac')
+        return redirect(request.url)
+    
