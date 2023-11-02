@@ -18,4 +18,7 @@ def create_app(config_name):
     from app.controllers import main_controller
     app.register_blueprint(main_controller.main)
 
+    from app.controllers import music_controller
+    app.register_blueprint(music_controller.music)
+
     return app

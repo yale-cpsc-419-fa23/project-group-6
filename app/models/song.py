@@ -44,16 +44,14 @@ class Song(db.Model):
         return song
 
     @classmethod
-    def search_by_name(cls, name, limit=None):
+    def search_by_name(cls, name, increment_popularity=False, limit=100):
         query = cls.query.filter(cls.name.ilike(f"%{name}%"))
 
-        # Increment popularity score for each matching song
-        for song in query.all():
-            song.popularity += 1
+        if increment_popularity:
+            for song in query.all():
+                song.popularity += 1
+            db.session.commit()
 
-        db.session.commit()
-
-        # Order by popularity and apply limit
         query = query.order_by(cls.popularity.desc())
         if limit:
             query = query.limit(limit)

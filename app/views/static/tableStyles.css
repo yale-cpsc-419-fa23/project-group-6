@@ -1,0 +1,43 @@
+/* Table styling */
+#search-results {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#search-results th, #search-results td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#search-results th {
+    background-color: #f2f2f2;
+}
+
+/* Column widths */
+#search-results th:nth-child(1), #search-results td:nth-child(1) { /* Name */
+    width: 50%;
+}
+
+#search-results th:nth-child(2), #search-results td:nth-child(2) { /* Upload Date */
+    width: 10%;
+}
+
+#search-results th:nth-child(3), #search-results td:nth-child(3) { /* Popularity */
+    width: 10%;
+}
+
+#search-results th:nth-child(4), #search-results td:nth-child(4) { /* Filepath */
+    width: 30%;
+}
+
+/* Style for the clickable song names */
+#search-results p {
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-results p:hover {
+    background-color: #808080;
+}
