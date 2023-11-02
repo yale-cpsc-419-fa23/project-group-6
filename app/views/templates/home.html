@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tableStyles.css') }}">
 </head>
 <body>
     <h1> Home </h1>
@@ -20,5 +23,24 @@
         </ul>
       {% endif %}
     {% endwith %}
+
+    <hr>
+
+    <input type="text" id="song-search" placeholder="Search for songs...">
+    <table id="search-results">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Upload Date</th>
+              <th>Popularity</th>
+              <th>Filepath</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Rows will be populated here by the JavaScript -->
+      </tbody>
+    </table>
+
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>
