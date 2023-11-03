@@ -1,0 +1,9 @@
+<form action="{{ url_for('music.save_song') }}" method="post" enctype="multipart/form-data">
+    <label for="name">Song Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="file">Upload Song:</label>
+    <input type="file" id="file" name="file" accept="audio/*" required>
+    
+    <input type="submit" value="Upload">
+</form>
