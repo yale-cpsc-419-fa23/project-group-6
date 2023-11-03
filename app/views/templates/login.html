@@ -1,41 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <!-- Link to the CSS file -->
+    <!-- Add the logo to the title bar -->
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
+    <title>Login - Your Music App</title>
+    <!-- Add Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
+    <!-- Button Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonStyles.css') }}">
 </head>
-<body>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul class="flashes">
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+<body class="bg-dark text-white login">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 align-self-center">
+                <!-- Your logo here -->
+                <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo mx-auto d-block" alt="logo">
+                <div class="card bg-secondary mt-5">
+                    <div class="card-body">
+                        <!-- <h3 class="card-title text-center">Music App Log in</h3> -->
+                        <!-- Flash messages here -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                            <ul class="flashes">
+                            {% for category, message in messages %}
+                              <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                            </ul>
+                          {% endif %}
+                        {% endwith %}
+                        <!-- Login form here -->
+                        <form method="post">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.username.label(class='form-label') }}
+                                {{ form.username(class='form-control') }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password.label(class='form-label') }}
+                                {{ form.password(class='form-control') }}
+                            </div>
+                            <div class="form-check mb-3">
+                                {{ form.remember_me(class='form-check-input') }}
+                                {{ form.remember_me.label(class='form-check-label') }}
+                            </div>
+                            <div>
+                                {{ form.submit(class='btn btn-primary') }}
+                            </div>
+                        </form>
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-link text-white" >Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<form method="post">
-    {{ form.hidden_tag() }}
-    <div>
-        {{ form.email.label }}: {{ form.email() }}
     </div>
-    <div>
-        {{ form.password.label }}: {{ form.password() }}
-    </div>
-    <div>
-        {{ form.remember_me() }} {{ form.remember_me.label }}
-    </div>
-    <div>
-        {{ form.submit(class='btn') }}
-    </div>
-</form>
-
-<a href="{{ url_for('auth.register') }}" class="btn" >Register</a>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
