@@ -1,6 +1,8 @@
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db, create_app
+
+from app import db
 
 
 class User(db.Model):
@@ -16,14 +18,18 @@ class User(db.Model):
         return f"<User {self.username}>"
     
     def check_password(self, password):
-        return self.password == password
+        return check_password_hash(self.password, password)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
 
     @classmethod
     def create(cls, username, password, email, gender = None, birthday = None):
         if cls.find_by_email(email) is not None:
             raise ValueError("Email already exists!")
-        new_user = cls(username=username, password=password, email=email, gender=gender, birthday=birthday,
+        new_user = cls(username=username, email=email, gender=gender, birthday=birthday,
                        registeredDateTime=datetime.now())
+        new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
         return new_user
@@ -59,13 +65,13 @@ class User(db.Model):
         return user
 
 
-if __name__ == "__main__":
-    app = create_app('DevelopmentConfig')
-    with app.app_context():
-        U = User()
-        print(U.find_by_id(100))
-        # print(U.create("test", "test", "test@example.com"))
-        print(U.find_by_email("test@example.com").userId)
+# if __name__ == "__main__":
+#     app = create_app('DevelopmentConfig')
+#     with app.app_context():
+#         U = User()
+#         print(U.find_by_id(100))
+#         # print(U.create("test", "test", "test@example.com"))
+#         print(U.find_by_email("test@example.com").userId)
 
 
 
