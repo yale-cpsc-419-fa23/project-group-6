@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
+    <title>Home Page</title>
     <!-- Add jQuery for AJAX functionality -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom Styles -->
@@ -29,26 +29,38 @@
 
     <!-- Main Content Area -->
     <div class="main-content">
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" id="song-search" placeholder="Search...">
-            <!-- <button id="search-button">Search</button> -->
-        </div>
-        <!-- Your main content goes here -->
-        <!-- Ensure the table is outside of the search-container div so that it doesn't interfere with its layout -->
-        <table id="search-results">
-          <thead>
-              <tr>
-                  <th>Name</th>
-                  <th>Upload Date</th>
-                  <th>Popularity</th>
-                  <th>Filepath</th>
-              </tr>
-          </thead>
-          <tbody>
-              <!-- Rows will be populated here by the JavaScript -->
-          </tbody>
-        </table>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes" style="margin-left: 20px;">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      <a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a>
+      <a href="{{ url_for('auth.logout') }}" class="btn btn-primary">Logout</a>
+      <!-- Search Bar -->
+      <div class="search-container">
+          <input type="text" id="song-search" placeholder="Search...">
+          <!-- <button id="search-button">Search</button> -->
+      </div>
+      <!-- Your main content goes here -->
+      <!-- Ensure the table is outside of the search-container div so that it doesn't interfere with its layout -->
+      <table id="search-results">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Upload Date</th>
+                <th>Popularity</th>
+                <th>Filepath</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated here by the JavaScript -->
+        </tbody>
+      </table>
     </div>
 
     <!-- Audio Player -->
