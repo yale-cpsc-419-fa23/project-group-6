@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website Title</title>
-    <link rel="stylesheet" href="static/customStyles.css">
-    <!-- Add other stylesheet links as needed -->
+    <!-- Add jQuery for AJAX functionality -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
+    <!-- Make sure to include the home styles as well -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='homeStyles.css') }}">
 </head>
 <body>
 
@@ -13,7 +17,7 @@
     <div id="sidebar" class="nav">
         <!-- Logo -->
         <a href="#home" class="logo">
-            <img src="static/img/logo.png" alt="Your Logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Your Logo">
         </a>
         <!-- Navigation Links -->
         <ul>
@@ -27,10 +31,24 @@
     <div class="main-content">
         <!-- Search Bar -->
         <div class="search-container">
-            <input type="text" placeholder="Search...">
-            <button>Search</button>
+            <input type="text" id="song-search" placeholder="Search...">
+            <button id="search-button">Search</button>
         </div>
         <!-- Your main content goes here -->
+        <!-- Ensure the table is outside of the search-container div so that it doesn't interfere with its layout -->
+        <table id="search-results">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Upload Date</th>
+                  <th>Popularity</th>
+                  <th>Filepath</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Rows will be populated here by the JavaScript -->
+          </tbody>
+        </table>
     </div>
 
     <!-- Audio Player -->
@@ -41,7 +59,7 @@
     </div>
 
     <!-- Scripts -->
-    <!-- Add any JavaScript files below -->
-    <script src="static/yourScript.js"></script>
+    <!-- Add the search.js file which contains the AJAX call for the search functionality -->
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>
