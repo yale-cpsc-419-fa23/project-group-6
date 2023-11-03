@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.find_by_username(form.username.data)
+        user = User.find_by_email(form.email.data)
         if user and user.check_password(form.password.data):
             session['user_id'] = user.userId
             flash('Logged in successfully.', 'success')
