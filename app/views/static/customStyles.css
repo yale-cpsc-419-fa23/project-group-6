@@ -1,47 +1,130 @@
-body, html {
-    height: 100%;
+/* Reset some basic elements */
+body, h1, h2, h3, ul, li {
     margin: 0;
-}
-.login {
-    background: #0a0a0a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    background-color: #222; /* Card background, slightly lighter than black for contrast */
-    color: #fff; /* Text color for readability on dark background */
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.logo-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.logo {
-    width: 150px; /* or any size you want */
-    height: auto;
-}
-.form-container {
-    padding: 2rem;
-}
-.btn-primary {
-    background-color: #4CAF50; /* Custom Primary Color */
-    border: none;
-    padding: 10px 20px;
-}
-.btn-link {
-    color: #4CAF50; /* Custom Link Color */
-}
-.flashes {
-    list-style-type: none;
     padding: 0;
 }
-.flashes li {
-    margin-bottom: 10px;
+
+/* Sidebar styles */
+#sidebar {
+    height: 100%;
+    width: 200px; /* Width of the sidebar */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111; /* Sidebar background color */
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Sidebar logo styles */
+#sidebar .logo img {
+    display: block; /* Ensures the logo is a block-level element for proper spacing */
+    width: 150px; /* Adjust as needed to control the size of the logo */
+    height: auto;
+    margin: 0 auto 20px; /* Centers the logo horizontally and adds space below */
+}
+
+#sidebar .logo {
+    display: block; /* Ensures the logo link is a block-level element */
+    text-align: center; /* Centers the logo within the sidebar */
+    margin-bottom: 10px; /* Additional space below the logo if needed */
+}
+
+#sidebar ul {
+    list-style-type: none;
+}
+
+#sidebar ul li a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #f1f1f1;
+}
+
+/* Search container */
+.search-container {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    z-index: 2; /* To stay on top of other elements */
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+}
+
+.search-container button {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 200px; /* Same as sidebar width */
+    padding: 60px 10px;
+}
+
+/* Fixed bottom audio player */
+.fixed-bottom {
+    padding: 10px 0;
+}
+
+.fixed-bottom .w-100 {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+/* Add some color to the links */
+#sidebar ul li a:hover, .search-container button:hover {
+    background-color: #575757; /* Dark grey */
+    color: white;
+}
+
+/* Audio player styles */
+audio {
+    width: 100%; /* Full width */
+}
+
+@media screen and (max-height: 450px) {
+    #sidebar {padding-top: 15px;}
+    #sidebar ul li a {font-size: 18px;}
+}
+/* login.html */
+/* General styles for the logo on login page */
+body.login img.logo {
+    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
+    margin-bottom: 20px; /* Provides space below the logo */
+}
+body.login{
+    background-color: #1a1a1a;
+}
+.search {
+    position: fixed; 
+    top: 10px; 
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    width: 50%; 
+    height: auto;
+    margin: auto; 
+    background-color: #0b0909;
+}
+.logo-container {
+    background-color: #0b0909;
 }
