@@ -4,12 +4,6 @@ body, h1, h2, h3, ul, li {
     padding: 0;
 }
 
-/* General styles for the logo on login page */
-body.login img.logo {
-    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
-    margin-bottom: 20px; /* Provides space below the logo */
-}
-
 /* Sidebar styles */
 #sidebar {
     height: 100%;
@@ -110,4 +104,18 @@ audio {
 @media screen and (max-height: 450px) {
     #sidebar {padding-top: 15px;}
     #sidebar ul li a {font-size: 18px;}
+}
+/* login.html */
+/* General styles for the logo on login page */
+body.login img.logo {
+    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
+    margin-bottom: 20px; /* Provides space below the logo */
+}
+
+.search {
+    position: fixed; 
+    top: 0; 
+    left: 200px; 
+    width: 70%; /* Full width minus the sidebar width */
+    background-color: #0b0909;
 }

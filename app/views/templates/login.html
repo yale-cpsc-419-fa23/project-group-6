@@ -4,15 +4,15 @@
     <!-- Add the logo to the title bar -->
     <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
     <title>Login - Your Music App</title>
-    <!-- Add Bootstrap for styling -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
     <!-- Button Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonStyles.css') }}">
+    <!-- Add Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-<body class="bg-dark text-white login">
+<body class="login">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <ul class="flashes">
@@ -22,16 +22,13 @@
         </ul>
       {% endif %}
     {% endwith %}
-  
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 align-self-center">
-                <!-- Your logo here -->
-                <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo mx-auto d-block" alt="logo">
-                <div class="card bg-secondary mt-5">
-                    <div class="card-body">
-                        <!-- <h3 class="card-title text-center">Music App Log in</h3> -->
-                        <!-- Flash messages here -->
+                  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo login-logo" alt="logo">
+                  <div class="search">
+                    <div class="row justify-content-center align-items-center" style="height: 100vh;"> This will center the card vertically and horizontally
+                        <div class="col-md-6">
+                            <div class="card bg-secondary mt-5">
+                                <div class="card-body">
+
                         {% with messages = get_flashed_messages(with_categories=true) %}
                           {% if messages %}
                             <ul class="flashes">
@@ -61,10 +58,10 @@
                             </div>
                         </form>
                         <a href="{{ url_for('auth.register') }}" class="btn btn-link text-white" >Register</a>
+                      </div>
                     </div>
                 </div>
             </div>
-        </div>
 
     </div>
     <!-- Optional JavaScript -->
