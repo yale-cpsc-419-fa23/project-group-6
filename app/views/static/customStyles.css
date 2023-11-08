@@ -56,6 +56,16 @@ body, h1, h2, h3, ul, li {
     justify-content: center;
     padding-top: 10px;
     z-index: 2; /* To stay on top of other elements */
+    margin-left: 200px;
+}
+
+.background-logo {
+    position: absolute; /* Absolute position */
+    top: 50%; /* Center vertically */
+    left: 55%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Align center */
+    opacity: 0.2; /* Adjust the visibility */
+    z-index: -1; /* Place it behind the form */
 }
 
 .search-container input[type="text"] {
