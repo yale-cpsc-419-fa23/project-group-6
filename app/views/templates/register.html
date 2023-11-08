@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
     <title>Register - Your Music App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
     <style>
         /* Include the same CSS styles as in login.html */
         body, html {
@@ -13,17 +13,41 @@
             margin: 0;
         }
         .login {
-            background: #0a0a0a;
+            background:  #0a0a0a;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative; 
         }
+        .background-logo {
+            position: absolute; /* Absolute position */
+            top: 50%; /* Center vertically */
+            left: 80%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Align center */
+            opacity: 0.2; /* Adjust the visibility */
+            z-index: -1; /* Place it behind the form */
+        }
+        .background-logo-left {
+            position: absolute; /* Absolute position */
+            top: 50%; /* Center vertically */
+            left: 20%; /* Position to the left */
+            transform: translate(-50%, -50%); /* Align center */
+            opacity: 0.2; /* Adjust the visibility */
+            z-index: -1; /* Place it behind the form */
+        }
+
         .card {
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             background-color: #222;
             color: #fff;
+            position: relative; /* Make sure card is above the background logo */
+            z-index: 1; /* Higher z-index than background-logo */
         }
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -69,10 +93,15 @@
     {% endif %}
     {% endwith %}
 
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+    <!-- Left Logo -->
+    <div class="background-logo-left">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+
     <div class="form-container">
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt="Your Music App Logo">
-        </div>
         <div class="card">
             <div class="card-body">
                 <!-- Registration Form -->
