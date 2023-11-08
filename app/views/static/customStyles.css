@@ -12,7 +12,7 @@ body, h1, h2, h3, ul, li {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111; /* Sidebar background color */
+    background-color: #232323;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -39,12 +39,12 @@ body, h1, h2, h3, ul, li {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #bbbbbb;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: #f1f1f1;
+    color: #ffffff;
 }
 
 /* Search container */
@@ -71,6 +71,8 @@ body, h1, h2, h3, ul, li {
     font-size: 17px;
     border: none;
     cursor: pointer;
+    background-color: #333333; /* Dark background for the input and button */
+    color: #ffffff;
 }
 
 /* Main content */
@@ -127,4 +129,13 @@ body.login{
 }
 .logo-container {
     background-color: #0b0909;
+}
+.btn-logout {
+    font-size: 21px !important; /* Smaller font size */
+    padding: 10px 20px !important; /* Smaller padding */
+    margin-top: 250px !important; /* Push down the button */
+    display: block !important; /* Change to block to apply margin */
+    width: auto !important; /* Ensure the button is only as wide as its content */
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
