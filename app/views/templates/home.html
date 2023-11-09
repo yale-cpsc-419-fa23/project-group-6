@@ -24,9 +24,15 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#explore">Explore</a></li>
             <li><a href="#library">Library</a></li>
+            <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a></li>
+            <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-logout">Logout</a></li>
         </ul>
     </div>
 
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+    
     <!-- Main Content Area -->
     <div class="main-content">
       {% with messages = get_flashed_messages(with_categories=true) %}
@@ -39,8 +45,6 @@
         {% endif %}
       {% endwith %}
 
-      <a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a>
-      <a href="{{ url_for('auth.logout') }}" class="btn btn-primary">Logout</a>
       <!-- Search Bar -->
       <div class="search-container">
           <input type="text" id="song-search" placeholder="Search...">

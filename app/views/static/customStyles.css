@@ -4,12 +4,6 @@ body, h1, h2, h3, ul, li {
     padding: 0;
 }
 
-/* General styles for the logo on login page */
-body.login img.logo {
-    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
-    margin-bottom: 20px; /* Provides space below the logo */
-}
-
 /* Sidebar styles */
 #sidebar {
     height: 100%;
@@ -18,7 +12,7 @@ body.login img.logo {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111; /* Sidebar background color */
+    background-color: #232323;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -45,12 +39,12 @@ body.login img.logo {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #bbbbbb;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: #f1f1f1;
+    color: #ffffff;
 }
 
 /* Search container */
@@ -62,6 +56,16 @@ body.login img.logo {
     justify-content: center;
     padding-top: 10px;
     z-index: 2; /* To stay on top of other elements */
+    margin-left: 200px;
+}
+
+.background-logo {
+    position: absolute; /* Absolute position */
+    top: 50%; /* Center vertically */
+    left: 55%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Align center */
+    opacity: 0.2; /* Adjust the visibility */
+    z-index: -1; /* Place it behind the form */
 }
 
 .search-container input[type="text"] {
@@ -77,6 +81,8 @@ body.login img.logo {
     font-size: 17px;
     border: none;
     cursor: pointer;
+    background-color: #333333; /* Dark background for the input and button */
+    color: #ffffff;
 }
 
 /* Main content */
@@ -110,4 +116,36 @@ audio {
 @media screen and (max-height: 450px) {
     #sidebar {padding-top: 15px;}
     #sidebar ul li a {font-size: 18px;}
+}
+/* login.html */
+/* General styles for the logo on login page */
+body.login img.logo {
+    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
+    margin-bottom: 20px; /* Provides space below the logo */
+}
+body.login{
+    background-color: #1a1a1a;
+}
+.search {
+    position: fixed; 
+    top: 10px; 
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    width: 50%; 
+    height: auto;
+    margin: auto; 
+    background-color: #0b0909;
+}
+.logo-container {
+    background-color: #0b0909;
+}
+.btn-logout {
+    font-size: 21px !important; /* Smaller font size */
+    padding: 10px 20px !important; /* Smaller padding */
+    margin-top: 250px !important; /* Push down the button */
+    display: block !important; /* Change to block to apply margin */
+    width: auto !important; /* Ensure the button is only as wide as its content */
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
