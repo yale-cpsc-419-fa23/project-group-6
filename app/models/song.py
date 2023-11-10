@@ -70,4 +70,9 @@ class Song(db.Model):
             return []
         return cls.query.filter(cls.songId.in_(song_ids)).all()
 
+    def rename(self, name):
+        self.name = name
+        db.session.commit()
+
+
 
