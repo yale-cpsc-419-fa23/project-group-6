@@ -13,3 +13,7 @@ class UserSongCreate(db.Model):
 
     def __repr__(self):
         return f"<UserSongCreate userId={self.userId}, songId={self.songId}>"
+
+    @classmethod
+    def get_user_song_ids(cls, user_id):
+        return cls.query.filter_by(userId=user_id).all()

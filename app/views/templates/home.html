@@ -22,9 +22,10 @@
         <!-- Navigation Links -->
         <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a></li>
+            <li><a href="{{ url_for('music.my_songs') }}" class="btn btn-primary">My Songs</a></li>
             <li><a href="#explore">Explore</a></li>
             <li><a href="#library">Library</a></li>
-            <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a></li>
             <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-logout">Logout</a></li>
         </ul>
     </div>

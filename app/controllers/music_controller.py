@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 from app.models.song import Song
+from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
 ALLOWED_EXTENSIONS = {'mp3', 'wav', 'flac'}
@@ -73,3 +74,35 @@ def save_song():
     else:
         flash('Allowed file types are mp3, wav, and flac', 'danger')
         return redirect(request.url)
+
+
+@music.route('/my-songs')
+def my_songs():
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    user_id = session['user_id']
+    user_songs = UserSongCreate.get_user_song_ids(user_id)
+    song_ids = [user_song.songId for user_song in user_songs]
+    songs = Song.get_songs_by_ids(song_ids)
+
+    return render_template('my_songs.html', songs=songs)
+
+
+@music.route('/rename-song/<int:song_id>', methods=['POST'])
+def rename_song(song_id):
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    song_to_rename = Song.query.get(song_id)
+    new_name = request.form['new_name']
+
+    if song_to_rename:
+        song_to_rename.rename(new_name)
+        flash('Song renamed successfully.')
+    else:
+        flash('Song not found.')
+
+    return redirect(url_for('music.my_songs'))

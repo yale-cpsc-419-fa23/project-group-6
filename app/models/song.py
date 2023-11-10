@@ -42,9 +42,9 @@ class Song(db.Model):
         return song
 
     @classmethod
-    def search_by_id(cls, song_id):
+    def search_by_id(cls, song_id, increment_popularity=False):
         song = db.session.get(cls, song_id)
-        if song:
+        if song and increment_popularity:
             song.popularity += 1
             db.session.commit()
         return song
