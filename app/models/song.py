@@ -4,8 +4,7 @@ from datetime import datetime
 from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
-from app import db, create_app
-
+from app import db
 
 class Song(db.Model):
     songId = db.Column(db.Integer, primary_key=True)
@@ -65,24 +64,10 @@ class Song(db.Model):
 
         return query.all()
 
+    @classmethod
+    def get_songs_by_ids(cls, song_ids):
+        if not song_ids:
+            return []
+        return cls.query.filter(cls.songId.in_(song_ids)).all()
 
-if __name__ == "__main__":
-    audio_path = "app/static/uploads/sample-12s.mp3"
-    features = audio_feature_extractor(audio_path)
-    song_details = {
-        "name": "Song Name Here",
-        "duration_ms": 200000,  # Example duration in ms
-        "filepath": audio_path
-    }
-    song_data = {**song_details, **features}
-    app = create_app('DevelopmentConfig')
-    with app.app_context():
-        # add song example
-        S = Song()
-        print(S.create(**song_data))
-        # search song by name example
-        matching_songs = Song.search_by_name("Song Name Here", limit=10)
-        for song in matching_songs:
-            print(song.name)
-        # query song by id example
-        print(song.search_by_id(1).name)
+

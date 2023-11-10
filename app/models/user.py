@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 from app import db
+from app.models.song import Song
 
 
 class User(db.Model):
@@ -64,14 +65,17 @@ class User(db.Model):
         db.session.commit()
         return user
 
+    def get_created_songs(self):
+        # Fetching all UserSongCreate records associated with this user
+        user_song_records = self.user_songs
 
-# if __name__ == "__main__":
-#     app = create_app('DevelopmentConfig')
-#     with app.app_context():
-#         U = User()
-#         print(U.find_by_id(100))
-#         # print(U.create("test", "test", "test@example.com"))
-#         print(U.find_by_email("test@example.com").userId)
+        # Extracting song IDs from those records
+        song_ids = [user_song.songId for user_song in user_song_records]
+
+        # Fetching Song records corresponding to those IDs
+        created_songs = Song.get_songs_by_ids(song_ids)
+        return created_songs
+
 
 
 
