@@ -66,7 +66,7 @@ def save_song():
 
         with current_app.app_context():
             # Add the song to the database
-            song = Song.create(**song_data)
+            song = Song.create(**song_data) #TODO: Add user_id to the function call
 
         flash('File successfully uploaded', 'success')
         return redirect(url_for('main.home'))

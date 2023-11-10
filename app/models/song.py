@@ -1,5 +1,7 @@
 import random
 from datetime import datetime
+
+from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
 from app import db, create_app
@@ -29,10 +31,15 @@ class Song(db.Model):
         return f"<Song {self.songId}>"
 
     @classmethod
-    def create(cls, **kwargs):
+    def create(cls, user_id, **kwargs):
         song = cls(upload_date=datetime.now(), popularity=0, **kwargs)
         db.session.add(song)
         db.session.commit()
+
+        user_song = UserSongCreate(userId=user_id, songId=song.songId)
+        db.session.add(user_song)
+        db.session.commit()
+
         return song
 
     @classmethod
