@@ -75,6 +75,22 @@ class User(db.Model):
         # Fetching Song records corresponding to those IDs
         created_songs = Song.get_songs_by_ids(song_ids)
         return created_songs
+    
+    def update_username(self, new_username):
+        self.username = new_username
+        db.session.commit()
+
+    def update_password(self, new_password):
+        self.set_password(new_password)
+        db.session.commit()
+
+    def update_gender(self, new_gender):
+        self.gender = new_gender
+        db.session.commit()
+
+    def update_birthday(self, new_birthday):
+        self.birthday = new_birthday
+        db.session.commit()
 
 
 

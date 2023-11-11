@@ -140,10 +140,18 @@ body.login{
 .logo-container {
     background-color: #0b0909;
 }
-.btn-logout {
+.btn-settings {
     font-size: 21px !important; /* Smaller font size */
     padding: 10px 20px !important; /* Smaller padding */
     margin-top: 250px !important; /* Push down the button */
+    display: block !important; /* Change to block to apply margin */
+    width: auto !important; /* Ensure the button is only as wide as its content */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.btn-logout {
+    font-size: 21px !important; /* Smaller font size */
+    padding: 10px 20px !important; /* Smaller padding */
     display: block !important; /* Change to block to apply margin */
     width: auto !important; /* Ensure the button is only as wide as its content */
     margin-left: auto !important;

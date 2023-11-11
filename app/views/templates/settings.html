@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Settings</title>
+    <!-- Add any additional stylesheet links here -->
+</head>
+<body>
+    <h1>User Settings</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flashes-container">
+            <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    {% endwith %}
+
+
+    <!-- Display user email and registration time -->
+    <p>Email: {{ user.email }}</p>
+    <p>You have been a user for {{ (datetime.utcnow() - user.registeredDateTime).days }} days.</p>
+
+    <form method="post" action="{{ url_for('settings.user_settings') }}">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }}: {{ form.username() }}<br>
+        {{ form.gender.label }}: {{ form.gender() }}<br>
+        {{ form.birthday.label }}: {{ form.birthday() }}<br>
+        {{ form.new_password.label }}: {{ form.new_password() }}<br>
+        {{ form.confirm_new_password.label }}: {{ form.confirm_new_password() }}<br>
+        {{ form.submit() }}
+    </form>
+
+    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
+    <!-- Add any additional scripts here -->
+</body>
+</html>
