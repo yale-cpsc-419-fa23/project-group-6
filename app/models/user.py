@@ -91,3 +91,20 @@ class User(db.Model):
     def update_birthday(self, new_birthday):
         self.Birthday = new_birthday
         db.session.commit()
+
+    def get_registered_date_time(self):
+        registered_date_time = self.RegisteredDateTime
+
+        return registered_date_time
+
+    def get_user_name(self):
+        return self.Username
+
+    def get_email(self):
+        return self.Email
+
+    def get_gender(self):
+        return self.Gender
+    
+    def get_birthday(self):
+        return self.Birthday

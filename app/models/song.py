@@ -79,3 +79,17 @@ class Song(db.Model):
         song_user_records = self.song_users
         # TODO: Multi Artists?
         return song_user_records[0].UploadDate
+    
+    def get_upload_user(self):
+        song_user_records = self.song_users
+        return song_user_records[0].user.Username
+    
+    def get_name(self):
+        return self.Name
+
+    def get_popularity(self):
+        return self.Popularity
+
+    def get_file_path(self):
+        return self.Filepath
+    

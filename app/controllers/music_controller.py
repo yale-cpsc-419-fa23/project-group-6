@@ -24,10 +24,11 @@ def search():
 
     songs = Song.search_by_name(song_name, increment_popularity, limit=10 if not increment_popularity else 100)
     songs_json = [
-        {"name": song.Name,
-         "filepath": song.Filepath,
+        {"name": song.get_name(),
+         "filepath": song.get_file_path(),
          "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-         "popularity": song.Popularity,
+         "upload_user": song.get_upload_user(),
+         "popularity": song.get_popularity(),
          } for song in songs]
 
     return jsonify(songs_json)

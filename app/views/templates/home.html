@@ -59,6 +59,7 @@
             <tr>
                 <th>Name</th>
                 <th>Upload Date</th>
+                <th>Uploaded By</th>
                 <th>Popularity</th>
                 <th>Filepath</th>
             </tr>
@@ -70,14 +71,12 @@
     </div>
 
     <!-- Audio Player -->
-    <div class="fixed-bottom bg-dark">
+    <!-- <div class="fixed-bottom bg-dark">
         <audio controls class="w-100">
-            <!-- Audio player here -->
         </audio>
-    </div>
+    </div> -->
 
     <!-- Scripts -->
-    <!-- Add the search.js file which contains the AJAX call for the search functionality -->
     <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>

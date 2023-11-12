@@ -21,7 +21,11 @@ def user_settings():
     user = User.find_by_id(user_id)
     form = SettingsForm(obj=user)
 
-    if form.validate_on_submit():
+    if request.method == 'GET':
+        form.username.data = user.get_user_name()
+        form.gender.data = user.get_gender()
+        form.birthday.data = user.get_birthday()
+    elif form.validate_on_submit():
         user.update_username(form.username.data)
         user.update_gender(form.gender.data)
 

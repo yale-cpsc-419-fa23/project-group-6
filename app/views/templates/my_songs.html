@@ -27,10 +27,10 @@
         <tbody>
             {% for song in songs %}
             <tr>
-                <td>{{ song.Name }}</td>
+                <td>{{ song.get_name() }}</td>
                 <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
-                <td>{{ song.Popularity }}</td>
-                <td>{{ song.Filepath }}</td>
+                <td>{{ song.get_popularity() }}</td>
+                <td>{{ song.get_file_path() }}</td>
                 <td>
                     <button class="btn-rename" onclick="showRenameField(this)">Rename</button>
                     <form method="post" action="{{ url_for('music.rename_song', song_id=song.SongId) }}" class="rename-form">
