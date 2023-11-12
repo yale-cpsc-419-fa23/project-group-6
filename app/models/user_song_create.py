@@ -1,19 +1,18 @@
-from sqlalchemy import Column, Integer, ForeignKey
-from sqlalchemy.orm import relationship
-
 from app import db, create_app
 
 
 class UserSongCreate(db.Model):
-    songId = Column(Integer, ForeignKey('song.songId'), primary_key=True)
-    userId = Column(Integer, ForeignKey('user.userId'), primary_key=True)
+    SongId = db.Column(db.Integer, db.ForeignKey('song.SongId'), primary_key=True)
+    UserId = db.Column(db.Integer, db.ForeignKey('user.UserId'), primary_key=True)
+    UploadDate = db.Column(db.DateTime)
+    EditDate = db.Column(db.DateTime)
 
-    user = relationship("User", backref="user_songs")
-    song = relationship("Song", backref="song_users")
+    user = db.relationship("User", backref="user_songs")
+    song = db.relationship("Song", backref="song_users")
 
     def __repr__(self):
-        return f"<UserSongCreate userId={self.userId}, songId={self.songId}>"
+        return f"<UserSongCreate UserId={self.UserId}, SongId={self.SongId}>"
 
     @classmethod
     def get_user_song_ids(cls, user_id):
-        return cls.query.filter_by(userId=user_id).all()
+        return cls.query.filter_by(UserId=user_id).all()

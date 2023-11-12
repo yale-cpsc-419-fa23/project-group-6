@@ -7,29 +7,29 @@ from app.models.song import Song
 
 
 class User(db.Model):
-    userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(80), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    gender = db.Column(db.String(10), nullable=False)
-    birthday = db.Column(db.Date, nullable=False)
-    registeredDateTime = db.Column(db.DateTime, nullable=False)
+    UserId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Username = db.Column(db.String(80), nullable=False)
+    Password = db.Column(db.String(80), nullable=False)
+    Email = db.Column(db.String(120), unique=True, nullable=False)
+    Gender = db.Column(db.String(10), nullable=False)
+    Birthday = db.Column(db.Date, nullable=False)
+    RegisteredDateTime = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
-        return f"<User {self.username}>"
+        return f"<User {self.Username}>"
     
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.Password, password)
 
     def set_password(self, password):
-        self.password = generate_password_hash(password)
+        self.Password = generate_password_hash(password)
 
     @classmethod
-    def create(cls, username, password, email, gender = None, birthday = None):
+    def create(cls, username, password, email, gender=None, birthday=None):
         if cls.find_by_email(email) is not None:
             raise ValueError("Email already exists!")
-        new_user = cls(username=username, email=email, gender=gender, birthday=birthday,
-                       registeredDateTime=datetime.now())
+        new_user = cls(Username=username, Email=email, Gender=gender, Birthday=birthday,
+                       RegisteredDateTime=datetime.now())
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
@@ -37,11 +37,11 @@ class User(db.Model):
 
     @classmethod
     def find_by_username(cls, username):
-        return cls.query.filter_by(username=username).first()
+        return cls.query.filter_by(Username=username).first()
 
     @classmethod
     def find_by_email(cls, email):
-        return cls.query.filter_by(email=email).first()
+        return cls.query.filter_by(Email=email).first()
 
     @classmethod
     def find_by_id(cls, user_id):
@@ -53,15 +53,15 @@ class User(db.Model):
         if not user:
             return None
         if username:
-            user.username = username
+            user.Username = username
         if password:
-            user.password = password
+            user.Password = password
         if email:
-            user.email = email
+            user.Email = email
         if gender:
-            user.gender = gender
+            user.Gender = gender
         if birthday:
-            user.birthday = birthday
+            user.Birthday = birthday
         db.session.commit()
         return user
 
@@ -70,14 +70,14 @@ class User(db.Model):
         user_song_records = self.user_songs
 
         # Extracting song IDs from those records
-        song_ids = [user_song.songId for user_song in user_song_records]
+        song_ids = [user_song.SongId for user_song in user_song_records]
 
         # Fetching Song records corresponding to those IDs
         created_songs = Song.get_songs_by_ids(song_ids)
         return created_songs
     
     def update_username(self, new_username):
-        self.username = new_username
+        self.Username = new_username
         db.session.commit()
 
     def update_password(self, new_password):
@@ -85,13 +85,9 @@ class User(db.Model):
         db.session.commit()
 
     def update_gender(self, new_gender):
-        self.gender = new_gender
+        self.Gender = new_gender
         db.session.commit()
 
     def update_birthday(self, new_birthday):
-        self.birthday = new_birthday
+        self.Birthday = new_birthday
         db.session.commit()
-
-
-
-

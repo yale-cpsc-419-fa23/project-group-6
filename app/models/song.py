@@ -6,36 +6,37 @@ from app.utils.audio_feature_utils import audio_feature_extractor
 
 from app import db
 
+
 class Song(db.Model):
-    songId = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
-    upload_date = db.Column(db.DateTime)
-    duration_ms = db.Column(db.Integer)
-    explicit = db.Column(db.Integer)
-    mode = db.Column(db.Integer)
-    key = db.Column(db.Integer)
-    tempo = db.Column(db.Float)
-    energy = db.Column(db.Float)
-    danceability = db.Column(db.Float)
-    loudness = db.Column(db.Float)
-    acousticness = db.Column(db.Float)
-    instrumentalness = db.Column(db.Float)
-    liveness = db.Column(db.Float)
-    speechiness = db.Column(db.Float)
-    valence = db.Column(db.Float)
-    popularity = db.Column(db.Integer)
-    filepath = db.Column(db.Text)
+    SongId = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.Text)
+    Duration_ms = db.Column(db.Integer)
+    Explicit = db.Column(db.Integer)
+    Mode = db.Column(db.Integer)
+    Key = db.Column(db.Integer)
+    Tempo = db.Column(db.Float)
+    Energy = db.Column(db.Float)
+    Danceability = db.Column(db.Float)
+    Loudness = db.Column(db.Float)
+    Acousticness = db.Column(db.Float)
+    Instrumentalness = db.Column(db.Float)
+    Liveness = db.Column(db.Float)
+    Speechiness = db.Column(db.Float)
+    Valence = db.Column(db.Float)
+    Popularity = db.Column(db.Integer)
+    Filepath = db.Column(db.Text)
 
     def __repr__(self):
-        return f"<Song {self.songId}>"
+        return f"<Song {self.SongId}>"
 
     @classmethod
     def create(cls, user_id, **kwargs):
-        song = cls(upload_date=datetime.now(), popularity=0, **kwargs)
+        song = cls(Popularity=0, **kwargs)
         db.session.add(song)
         db.session.commit()
 
-        user_song = UserSongCreate(userId=user_id, songId=song.songId)
+        user_song = UserSongCreate(UserId=user_id, SongId=song.SongId, UploadDate=datetime.now(),
+                                   EditDate=datetime.now())
         db.session.add(user_song)
         db.session.commit()
 
@@ -45,20 +46,20 @@ class Song(db.Model):
     def search_by_id(cls, song_id, increment_popularity=False):
         song = db.session.get(cls, song_id)
         if song and increment_popularity:
-            song.popularity += 1
+            song.Popularity += 1
             db.session.commit()
         return song
 
     @classmethod
     def search_by_name(cls, name, increment_popularity=False, limit=100):
-        query = cls.query.filter(cls.name.ilike(f"%{name}%"))
+        query = cls.query.filter(cls.Name.ilike(f"%{name}%"))
 
         if increment_popularity:
             for song in query.all():
-                song.popularity += 1
+                song.Popularity += 1
             db.session.commit()
 
-        query = query.order_by(cls.popularity.desc())
+        query = query.order_by(cls.Popularity.desc())
         if limit:
             query = query.limit(limit)
 
@@ -68,11 +69,8 @@ class Song(db.Model):
     def get_songs_by_ids(cls, song_ids):
         if not song_ids:
             return []
-        return cls.query.filter(cls.songId.in_(song_ids)).all()
+        return cls.query.filter(cls.SongId.in_(song_ids)).all()
 
     def rename(self, name):
-        self.name = name
+        self.Name = name
         db.session.commit()
-
-
-
