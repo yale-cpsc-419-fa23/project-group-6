@@ -8,14 +8,15 @@ if __name__ == "__main__":
     with app.app_context():
         print("User Create Test:")
         U = User()
-        user = U.find_by_email("t@t.com")
+        user = U.find_by_email("vo9kq@dkr.com")
         print(user)
         print(user.get_created_songs())
 
         print("song edit test")
         for song in user.get_created_songs():
-            song.rename(song.name + "rename")
+            song.rename(song.Name + "rename")
 
+        print(Song.search_by_name("love"))
 
 
     # audio_path = "app/static/uploads/sample-12s.mp3"

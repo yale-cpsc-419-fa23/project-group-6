@@ -74,3 +74,8 @@ class Song(db.Model):
     def rename(self, name):
         self.Name = name
         db.session.commit()
+
+    def get_upload_date(self):
+        song_user_records = self.song_users
+        # TODO: Multi Artists?
+        return song_user_records[0].UploadDate

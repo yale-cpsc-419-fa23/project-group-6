@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 from app.models.song import Song
+from app.models.user import User
 from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
@@ -25,7 +26,7 @@ def search():
     songs_json = [
         {"name": song.Name,
          "filepath": song.Filepath,
-         "upload_date": song.UploadDate.strftime('%Y-%m-%d', ),
+         "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
          "popularity": song.Popularity,
          } for song in songs]
 
@@ -60,8 +61,8 @@ def save_song():
         features = audio_feature_extractor(file_path)
         # features = {}
         song_details = {
-            "name": request.form['name'],
-            "filepath": file_path
+            "Name": request.form['name'],
+            "Filepath": file_path
         }
         song_data = {**song_details, **features}
 
@@ -83,9 +84,8 @@ def my_songs():
         return redirect(url_for('auth.login'))
 
     user_id = session['user_id']
-    user_songs = UserSongCreate.get_user_song_ids(user_id)
-    song_ids = [user_song.songId for user_song in user_songs]
-    songs = Song.get_songs_by_ids(song_ids)
+    user = User.find_by_id(user_id)
+    songs = user.get_created_songs()
 
     return render_template('my_songs.html', songs=songs)
 

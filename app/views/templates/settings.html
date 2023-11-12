@@ -23,7 +23,7 @@
 
     <!-- Display user email and registration time -->
     <p>Email: {{ user.email }}</p>
-    <p>You have been a user for {{ (datetime.utcnow() - user.registeredDateTime).days }} days.</p>
+    <p>You have been a user for {{ (datetime.utcnow() - user.RegisteredDateTime).days }} days.</p>
 
     <form method="post" action="{{ url_for('settings.user_settings') }}">
         {{ form.hidden_tag() }}
