@@ -1,4 +1,4 @@
-from app import db, create_app
+from app import db
 
 
 class UserSongCreate(db.Model):

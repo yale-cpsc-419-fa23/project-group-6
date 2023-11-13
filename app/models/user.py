@@ -1,7 +1,6 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 from app import db
 from app.models.song import Song
 
@@ -17,7 +16,7 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.Username}>"
-    
+
     def check_password(self, password):
         return check_password_hash(self.Password, password)
 
@@ -66,16 +65,11 @@ class User(db.Model):
         return user
 
     def get_created_songs(self):
-        # Fetching all UserSongCreate records associated with this user
         user_song_records = self.user_songs
-
-        # Extracting song IDs from those records
         song_ids = [user_song.SongId for user_song in user_song_records]
-
-        # Fetching Song records corresponding to those IDs
         created_songs = Song.get_songs_by_ids(song_ids)
         return created_songs
-    
+
     def update_username(self, new_username):
         self.Username = new_username
         db.session.commit()
@@ -105,6 +99,6 @@ class User(db.Model):
 
     def get_gender(self):
         return self.Gender
-    
+
     def get_birthday(self):
         return self.Birthday

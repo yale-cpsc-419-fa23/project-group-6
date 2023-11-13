@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 
 from app.models.user_song_create import UserSongCreate
-from app.utils.audio_feature_utils import audio_feature_extractor
+
 
 from app import db
 
@@ -25,6 +25,7 @@ class Song(db.Model):
     Valence = db.Column(db.Float)
     Popularity = db.Column(db.Integer)
     Filepath = db.Column(db.Text)
+    genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
 
     def __repr__(self):
         return f"<Song {self.SongId}>"
@@ -92,4 +93,6 @@ class Song(db.Model):
 
     def get_file_path(self):
         return self.Filepath
-    
+
+    def get_genres(self):
+        return self.genres
