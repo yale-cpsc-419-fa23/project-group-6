@@ -27,7 +27,7 @@ def search():
         {"name": song.get_name(),
          "filepath": song.get_file_path(),
          "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-         "upload_user": song.get_upload_user(),
+         "upload_user": song.get_creators()[0].get_user_name(),
          "popularity": song.get_popularity(),
          } for song in songs]
 

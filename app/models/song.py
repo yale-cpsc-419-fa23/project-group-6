@@ -1,10 +1,9 @@
 import random
 from datetime import datetime
 
-from app.models.user_song_create import UserSongCreate
-
-
 from app import db
+from app.models.user_song_create import UserSongCreate
+from app.models.genre import Genre
 
 
 class Song(db.Model):
@@ -26,6 +25,7 @@ class Song(db.Model):
     Popularity = db.Column(db.Integer)
     Filepath = db.Column(db.Text)
     genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
+    create_records = db.relationship('UserSongCreate', backref='song')
 
     def __repr__(self):
         return f"<Song {self.SongId}>"
@@ -35,7 +35,6 @@ class Song(db.Model):
         song = cls(Popularity=0, **kwargs)
         db.session.add(song)
         db.session.commit()
-
         user_song = UserSongCreate(UserId=user_id, SongId=song.SongId, UploadDate=datetime.now(),
                                    EditDate=datetime.now())
         db.session.add(user_song)
@@ -74,17 +73,18 @@ class Song(db.Model):
 
     def rename(self, name):
         self.Name = name
+
+        user_song_records = self.create_records
+        for record in user_song_records:
+            record.EditDate = datetime.now()
+
         db.session.commit()
 
     def get_upload_date(self):
-        song_user_records = self.song_users
-        # TODO: Multi Artists?
-        return song_user_records[0].UploadDate
-    
-    def get_upload_user(self):
-        song_user_records = self.song_users
-        return song_user_records[0].user.Username
-    
+        if self.create_records:
+            return min(record.UploadDate for record in self.create_records)
+        return None
+
     def get_name(self):
         return self.Name
 
@@ -96,3 +96,23 @@ class Song(db.Model):
 
     def get_genres(self):
         return self.genres
+
+    def get_creators(self):
+        return [record.get_creator() for record in self.create_records]
+
+    def add_creators(self, user_ids):
+        for user_id in user_ids:
+            existing_record = UserSongCreate.query.filter_by(UserId=user_id, SongId=self.SongId).first()
+            if not existing_record:
+                user_song = UserSongCreate(UserId=user_id, SongId=self.SongId,
+                                           UploadDate=datetime.now(), EditDate=datetime.now())
+                db.session.add(user_song)
+            else:
+                existing_record.EditDate = datetime.now()
+        db.session.commit()
+
+    def add_genres(self, genres):
+        for genre in genres:
+            if genre not in self.genres:
+                self.genres.append(genre)
+        db.session.commit()

@@ -21,6 +21,18 @@ class Genre(db.Model):
             return cls.query.filter_by(Name=genre_name).first()
         return cls.query.filter(cls.Name.like(f"%{genre_name}%"))
 
+    @classmethod
+    def create_genres(cls, genre_names):
+        genres = []
+        for genre_name in genre_names:
+            genre = Genre.query.filter_by(Name=genre_name).first()
+            if not genre:
+                genre = Genre(Name=genre_name)
+                db.session.add(genre)
+                db.session.commit()
+            genres.append(genre)
+        return genres
+
     def __repr__(self):
         return self.Name
 
@@ -32,3 +44,5 @@ class Genre(db.Model):
 
     def get_songs(self):
         return self.songs
+
+

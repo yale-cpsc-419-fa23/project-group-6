@@ -3,7 +3,6 @@ from app.models.song import Song
 from app.models.user import User
 from app.models.genre import Genre
 
-from app.models.song_genre import SongGenre
 from app.utils.audio_feature_utils import audio_feature_extractor
 
 if __name__ == "__main__":
@@ -15,21 +14,24 @@ if __name__ == "__main__":
         print(user)
         print(user.get_created_songs())
 
-        print("song edit test")
         for song in user.get_created_songs():
-            song.rename(song.Name + "rename")
+            print(song.get_creators())
+            print(song.get_upload_date())
 
         print(Song.search_by_name("love"))
-
-        for song in Song.search_by_name("love"):
-            print([genre.get_genre_name() for genre in song.get_genres()])
+        song = Song.search_by_name("stupid")[0]
+        print([genre.get_genre_name() for genre in song.get_genres()])
 
         genre = Genre.find_by_id(0)
         print([song.get_name() for song in genre.get_songs()][:10])
 
         genres = Genre.find_by_name("hip hop")
-        for genre in genres:
+        for genre in genres[0:1]:
             print(genre.get_genre_name())
+
+        genres = Genre.create_genres(["test_genre"])
+        song.add_genres(genres)
+        print(song.get_genres())
 
 
 
