@@ -71,6 +71,10 @@ class Song(db.Model):
         if not song_ids:
             return []
         return cls.query.filter(cls.SongId.in_(song_ids)).all()
+    
+    @classmethod
+    def get_top_songs(cls, limit=20):
+        return cls.query.order_by(cls.Popularity.desc()).limit(limit).all()
 
     @classmethod
     def get_all_songs(cls, n=None):

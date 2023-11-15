@@ -1,0 +1,35 @@
+.top-songs-title {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.top-songs-container {
+    max-height: 40vh;
+    overflow-y: auto;
+    margin: 20px auto;
+    width: 80%;
+}
+
+#top-songs {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#top-songs th, #top-songs td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.genre-search-container {
+    text-align: center;
+}
+
+#genre-search {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#top-songs tr:nth-child(even) {background-color: #f2f2f2;}

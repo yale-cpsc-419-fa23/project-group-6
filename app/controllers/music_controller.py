@@ -6,6 +6,7 @@ import os
 
 from app.models.song import Song
 from app.models.user import User
+from app.models.genre import Genre
 from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
@@ -107,3 +108,11 @@ def rename_song(song_id):
         flash('Song not found.')
 
     return redirect(url_for('music.my_songs'))
+
+
+@music.route('/search-genre', methods=['GET'])
+def search_genre():
+    genre_name = request.args.get('genre_name')
+    genres = Genre.find_by_name(genre_name)
+    genres_json = [{"Name": genre.get_genre_name()} for genre in genres]
+    return jsonify(genres_json)
