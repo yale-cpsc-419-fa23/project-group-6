@@ -2,6 +2,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
+from app.models.user_song_like import UserSongLike
 
 
 class User(db.Model):
@@ -13,6 +14,7 @@ class User(db.Model):
     Birthday = db.Column(db.Date, nullable=False)
     RegisteredDateTime = db.Column(db.DateTime, nullable=False)
     create_records = db.relationship('UserSongCreate', backref='user')
+    like_records = db.relationship('UserSongLike', order_by='UserSongLike.LikedDate.desc()', backref='user')
 
     def __repr__(self):
         return f"<User {self.Username}>"
@@ -64,9 +66,31 @@ class User(db.Model):
         db.session.commit()
         return user
 
+    # info retrieval
+    def get_registered_date_time(self):
+        registered_date_time = self.RegisteredDateTime
+
+        return registered_date_time
+
+    def get_username(self):
+        return self.Username
+
+    def get_email(self):
+        return self.Email
+
+    def get_gender(self):
+        return self.Gender
+
+    def get_birthday(self):
+        return self.Birthday
+
     def get_created_songs(self):
         return [record.get_song() for record in self.create_records]
 
+    def get_liked_songs(self, n_likes):
+        return [record.get_song() for record in self.like_records[:n_likes]]
+
+    # info update
     def update_username(self, new_username):
         self.Username = new_username
         db.session.commit()
@@ -83,19 +107,14 @@ class User(db.Model):
         self.Birthday = new_birthday
         db.session.commit()
 
-    def get_registered_date_time(self):
-        registered_date_time = self.RegisteredDateTime
+    def add_liked(self, song_id):
+        existing_like = UserSongLike.query.filter_by(UserId=self.UserId, SongId=song_id).first()
+        if not existing_like:
+            like_record = UserSongLike(UserId=self.UserId, SongId=song_id, LikedDate=datetime.now())
+            self.like_records.append(like_record)
+            db.session.commit()
 
-        return registered_date_time
 
-    def get_user_name(self):
-        return self.Username
 
-    def get_email(self):
-        return self.Email
 
-    def get_gender(self):
-        return self.Gender
 
-    def get_birthday(self):
-        return self.Birthday

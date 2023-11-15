@@ -1,6 +1,6 @@
 import random
 from datetime import datetime
-
+from sqlalchemy.sql.expression import func
 from app import db
 from app.models.user_song_create import UserSongCreate
 from app.models.genre import Genre
@@ -26,6 +26,7 @@ class Song(db.Model):
     Filepath = db.Column(db.Text)
     genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
     create_records = db.relationship('UserSongCreate', backref='song')
+    like_records = db.relationship('UserSongLike', backref='song')
 
     def __repr__(self):
         return f"<Song {self.SongId}>"
@@ -71,6 +72,12 @@ class Song(db.Model):
             return []
         return cls.query.filter(cls.SongId.in_(song_ids)).all()
 
+    @classmethod
+    def get_all_songs(cls, n=None):
+        if n is None:
+            return db.session.query(cls).all()
+        return db.session.query(cls).order_by(func.random()).limit(n).all()
+
     def rename(self, name):
         self.Name = name
 
@@ -99,6 +106,9 @@ class Song(db.Model):
 
     def get_creators(self):
         return [record.get_creator() for record in self.create_records]
+
+    def get_id(self):
+        return self.SongId
 
     def add_creators(self, user_ids):
         for user_id in user_ids:
