@@ -2,6 +2,7 @@ from app import create_app
 from app.models.song import Song
 from app.models.user import User
 from app.models.genre import Genre
+from app.utils.recommendation_utils import recommend_songs
 
 from app.utils.audio_feature_utils import audio_feature_extractor
 
@@ -32,6 +33,18 @@ if __name__ == "__main__":
         genres = Genre.create_genres(["test_genre"])
         song.add_genres(genres)
         print(song.get_genres())
+
+        user = U.find_by_username('t')
+        for song in Song.search_by_name("test"):
+            user.add_liked(song.get_id())
+        print(user.get_liked_songs(5))
+
+        for song in recommend_songs(71437):
+            print(song.get_name())
+            genres = song.get_genres()
+            if len(genres) != 0:
+                for genre in genres:
+                    print(genre.get_genre_name(), end=", ")
 
 
 
