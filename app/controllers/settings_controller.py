@@ -22,7 +22,7 @@ def user_settings():
     form = SettingsForm(obj=user)
 
     if request.method == 'GET':
-        form.username.data = user.get_user_name()
+        form.username.data = user.get_username()
         form.gender.data = user.get_gender()
         form.birthday.data = user.get_birthday()
     elif form.validate_on_submit():
