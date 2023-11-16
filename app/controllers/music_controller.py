@@ -1,5 +1,3 @@
-import os
-
 from flask import Blueprint, jsonify, request, render_template, redirect, flash, current_app, url_for, session
 from werkzeug.utils import secure_filename
 import os
@@ -116,3 +114,21 @@ def search_genre():
     genres = Genre.find_by_name(genre_name)
     genres_json = [{"Name": genre.get_genre_name()} for genre in genres]
     return jsonify(genres_json)
+
+
+@music.route('/top-songs-by-genre', methods=['GET'])
+def top_songs_by_genre():
+    genre_name = request.args.get('genre')
+    top_songs = Genre.get_top_songs(genre_name, limit=20)
+
+    if top_songs:
+        songs_json = [
+            {
+                "name": song.get_name(),
+                "upload_user": song.get_creators()[0].get_username(),
+                "popularity": song.get_popularity()
+            } for song in top_songs
+        ]
+        return jsonify(songs_json)
+    else:
+        return jsonify([])

@@ -23,7 +23,7 @@
                     {% for song in top_songs %}
                     <tr>
                         <td>{{ song.get_name() }}</td>
-                        <td>{{ song.get_creators()[0].get_user_name() }}</td>
+                        <td>{{ song.get_creators()[0].get_username() }}</td>
                         <td>{{ song.get_popularity() }}</td>
                     </tr>
                     {% endfor %}
@@ -37,6 +37,22 @@
             <div id="genre-search-results">
                 <!-- Search results will be populated here -->
             </div>
+        </div>
+
+        <h3 id="top-songs-by-genre-title" class="top-songs-title"></h3>
+        <div class="top-songs-container">
+            <table id="top-songs-by-genre">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Uploaded By</th>
+                        <th>Popularity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically by JavaScript -->
+                </tbody>
+            </table>
         </div>
     </div>
 

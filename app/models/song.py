@@ -5,7 +5,6 @@ from app import db
 from app.models.user_song_create import UserSongCreate
 from app.models.genre import Genre
 
-
 class Song(db.Model):
     SongId = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.Text)
@@ -81,7 +80,7 @@ class Song(db.Model):
         if n is None:
             return db.session.query(cls).all()
         return db.session.query(cls).order_by(func.random()).limit(n).all()
-
+    
     def rename(self, name):
         self.Name = name
 
