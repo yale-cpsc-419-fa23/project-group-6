@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
-    <title>Register - Your Music App</title>
+    <title>Login - Your Music App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body, html {
@@ -54,21 +54,38 @@
         .flashes li {
             margin-bottom: 10px;
         }
+
+        /* Styles for flash messages */
+        .flash-messages-container {
+            position: fixed; /* Fixed position */
+            top: 70%; /* Adjust as per your preference */
+            left: 30%; /* Center horizontally */
+            transform: translateX(-50%); /* Centering adjustment */
+            z-index: 1000; /* High z-index to float above other elements */
+            width: 100%; /* Full width */
+            text-align: center; /* Center the text */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        .flashes .alert {
+            display: inline-block; /* Display alerts inline */
+            pointer-events: auto; /* Enable interactions with the alert */
+        }
     </style>
 </head>
 <body class="login">
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="flashes-container">
-                <ul class="flashes">
+    <!-- Flash messages container -->
+    <div class="flash-messages-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
                     {% for category, message in messages %}
-                        <li class="{{ category }}">{{ message }}</li>
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
                     {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    {% endwith %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
 
     <div class="form-container">
         <div class="logo-container">
@@ -76,7 +93,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <!-- Registration Form -->
+                <!-- Login Form -->
                 <form method="post">
                     {{ form.hidden_tag() }}
                     <h3 class="card-title text-center mb-4">Log in to Music</h3>
@@ -96,7 +113,7 @@
                         {{ form.submit(class='btn btn-primary btn-block') }}
                     </div>
                 </form>
-                <!-- Login Link -->
+                <!-- Register Link -->
                 <div class="text-center mt-3">
                     <a href="{{ url_for('auth.register') }}" class="btn btn-link">Do not have an account? Register</a>
                 </div>
@@ -105,10 +122,4 @@
     </div>
 
     <!-- JavaScript Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min

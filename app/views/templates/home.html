@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
     <!-- Make sure to include the home styles as well -->
     <link rel="stylesheet" href="{{ url_for('static', filename='homeStyles.css') }}">
+
+    <style>
+        /* Additional style for table headers */
+        #search-results th {
+            padding-left: 65px; /* Increase left padding */
+            padding-right: 65px; /* Increase right padding */
+            text-align: left; /* Optional: align text to the left */
+        }
+    </style>
 </head>
 <body>
 
@@ -50,10 +59,8 @@
       <!-- Search Bar -->
       <div class="search-container">
           <input type="text" id="song-search" placeholder="Search...">
-          <!-- <button id="search-button">Search</button> -->
       </div>
-      <!-- Your main content goes here -->
-      <!-- Ensure the table is outside of the search-container div so that it doesn't interfere with its layout -->
+      <!-- Table for Content -->
       <table id="search-results">
         <thead>
             <tr>

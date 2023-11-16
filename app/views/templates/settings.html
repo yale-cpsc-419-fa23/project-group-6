@@ -3,39 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <title>User Settings</title>
-    <!-- Add any additional stylesheet links here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        /* Copy CSS from register.html here */
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .login {
+            background:  #0a0a0a;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; 
+        }
+        .background-logo {
+            position: absolute;
+            top: 50%;
+            left: 80%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            background-color: #222;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .form-container {
+            padding: 2rem;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+            padding: 10px 20px;
+        }
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            margin-bottom: 10px;
+        }
+
+        /* Styles for flash messages */
+        .flash-messages-container {
+            position: fixed; /* Fixed position */
+            top: 80%; /* Adjust as per your preference */
+            left: 25%; /* Center horizontally */
+            transform: translateX(-50%); /* Centering adjustment */
+            z-index: 1000; /* High z-index to float above other elements */
+            width: 100%; /* Full width */
+            text-align: center; /* Center the text */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        .flashes .alert {
+            display: inline-block; /* Display alerts inline */
+            pointer-events: auto; /* Enable interactions with the alert */
+        }
+    </style>
 </head>
-<body>
-    <h1>User Settings</h1>
+<body class="login">
+    <!-- Flash messages container -->
+    <div class="flash-messages-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+    </div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="flashes-container">
-            <ul class="flashes">
-            {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-            </ul>
+    <div class="background-logo">
+        <!-- Adjust the image source as needed -->
+        <img src="{{ url_for('static', filename='img/settings_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+
+    <div class="form-container">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">User Settings</h3>
+                <!-- Display user email and registration time -->
+                <p>Email: {{ user.get_email() }}</p>
+                <p>You have been a user for {{ (datetime.utcnow() - user.get_registered_date_time()).days + 1}} days.</p>
+
+                <form method="post" action="{{ url_for('settings.user_settings') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.username.label(class='form-label') }}
+                        {{ form.username(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.gender.label(class='form-label') }}
+                        {{ form.gender(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.birthday.label(class='form-label') }}
+                        {{ form.birthday(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.new_password.label(class='form-label') }}
+                        {{ form.new_password(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.confirm_new_password.label(class='form-label') }}
+                        {{ form.confirm_new_password(class='form-control') }}
+                    </div>
+                    <div class="text-center">
+                        {{ form.submit(class='btn btn-primary btn-block') }}
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
+                </div>
+            </div>
         </div>
-        {% endif %}
-    {% endwith %}
+    </div>
 
-
-    <!-- Display user email and registration time -->
-    <p>Email: {{ user.get_email() }}</p>
-    <p>You have been a user for {{ (datetime.utcnow() - user.get_registered_date_time()).days + 1}} days.</p>
-
-    <form method="post" action="{{ url_for('settings.user_settings') }}">
-        {{ form.hidden_tag() }}
-        {{ form.username.label }}: {{ form.username() }}<br>
-        {{ form.gender.label }}: {{ form.gender() }}<br>
-        {{ form.birthday.label }}: {{ form.birthday() }}<br>
-        {{ form.new_password.label }}: {{ form.new_password() }}<br>
-        {{ form.confirm_new_password.label }}: {{ form.confirm_new_password() }}<br>
-        {{ form.submit() }}
-    </form>
-
-    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
-    <!-- Add any additional scripts here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

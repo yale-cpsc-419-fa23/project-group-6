@@ -61,7 +61,7 @@ body, h1, h2, h3, ul, li {
 
 .background-logo {
     position: absolute; /* Absolute position */
-    top: 50%; /* Center vertically */
+    top: 60%; /* Center vertically */
     left: 55%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Align center */
     opacity: 0.2; /* Adjust the visibility */

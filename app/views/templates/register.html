@@ -70,20 +70,38 @@
         .flashes li {
             margin-bottom: 10px;
         }
+
+        /* Styles for flash messages */
+        .flash-messages-container {
+            position: fixed; /* Fixed position */
+            top: 40%; /* Adjust as per your preference */
+            left: 30%; /* Center horizontally */
+            transform: translateX(-50%); /* Centering adjustment */
+            z-index: 1000; /* High z-index to float above other elements */
+            width: 100%; /* Full width */
+            text-align: center; /* Center the text */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        .flashes .alert {
+            display: inline-block; /* Display alerts inline */
+            pointer-events: auto; /* Enable interactions with the alert */
+        }
     </style>
 </head>
 <body class="login">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <div class="flashes-container">
-        <ul class="flashes">
-        {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
+    <!-- Flash messages container -->
+    <div class="flash-messages-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
-    {% endif %}
-    {% endwith %}
 
     <div class="background-logo">
         <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">

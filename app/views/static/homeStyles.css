@@ -22,6 +22,7 @@ body {
     color: #ffffff;
 }
 
+
 #search-results th, #search-results td {
     padding: 15px; /* more padding for a better look */
     text-align: left;
@@ -38,5 +39,3 @@ body {
 .results-container {
     padding: 0 20px; /* padding around the table */
 }
-
-/* More styles can be added as per the design requirements */
