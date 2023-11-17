@@ -48,15 +48,12 @@ body {
     margin-bottom: 10px;
 }
 .flash-messages-container {
-    position: fixed; 
-    top: 85%; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    z-index: 1000; 
     width: 100%; 
-    text-align: center;
-    pointer-events: none; 
+    text-align: center; 
+    margin-top: 20px; /* Adjust this value as needed for spacing */
 }
+
+
 
 .flashes .alert {
     display: inline-block;

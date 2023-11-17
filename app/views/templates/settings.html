@@ -12,23 +12,11 @@
     </div>
 
     <div class="form-container">
-        <div class="flash-messages-container">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                <div class="flashes">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            {% endwith %}
-        </div>
-        
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center mb-4">User Settings</h3>
                 <p>Email: {{ user.get_email() }}</p>
-                <p>You have been a user for {{ (datetime.utcnow() - user.get_registered_date_time()).days + 1}} days.</p>
+                <p>You have been a user for {{ (datetime.utcnow() - user.get_registered_date_time()).days + 1 }} days.</p>
 
                 <form method="post" action="{{ url_for('settings.user_settings') }}">
                     {{ form.hidden_tag() }}
@@ -62,11 +50,25 @@
                         {{ form.submit(class='btn btn-primary btn-block') }}
                     </div>
                 </form>
+
                 <div class="text-center mt-3">
                     <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
                 </div>
             </div>
         </div>
+
+        <div class="flash-messages-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
