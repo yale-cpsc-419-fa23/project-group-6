@@ -47,14 +47,9 @@ body {
 }
 
 .flash-messages-container {
-    position: fixed; 
-    top: 70%; 
-    left: 30%; 
-    transform: translateX(-50%); 
-    z-index: 1000; 
     width: 100%; 
     text-align: center; 
-    pointer-events: none; 
+    margin-top: 20px;
 }
 
 .flashes .alert {

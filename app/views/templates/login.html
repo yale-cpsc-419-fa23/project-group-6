@@ -9,22 +9,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='loginStyles.css') }}">
 </head>
 <body class="login">
-    <div class="flash-messages-container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flashes">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-    </div>
-
     <div class="form-container">
         <div class="logo-container">
             <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt="Your Music App Logo">
         </div>
+
         <div class="card">
             <div class="card-body">
                 <form method="post">
@@ -50,6 +39,18 @@
                     <a href="{{ url_for('auth.register') }}" class="btn btn-link">Do not have an account? Register</a>
                 </div>
             </div>
+        </div>
+
+        <div class="flash-messages-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 
