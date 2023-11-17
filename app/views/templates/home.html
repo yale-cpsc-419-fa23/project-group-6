@@ -28,6 +28,10 @@
             <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a></li>
             <li><a href="{{ url_for('music.my_songs') }}" class="btn btn-primary">My Songs</a></li>
             <li><a href="#library">Library</a></li>
+        </ul>
+
+        <!-- Bottom links -->
+        <ul class="bottom-links"> <!-- Added class -->
             <li><a href="{{ url_for('settings.user_settings') }}" class="btn btn-primary btn-settings">Settings</a></li>
             <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-logout">Logout</a></li>
         </ul>
@@ -38,33 +42,33 @@
     </div>
     
     <div class="main-content">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <ul class="flashes" style="margin-left: 20px;">
-          {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes" style="margin-left: 20px;">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
 
-      <div class="search-container">
-          <input type="text" id="song-search" placeholder="Search...">
-      </div>
-      <table id="search-results">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Upload Date</th>
-                <th>Uploaded By</th>
-                <th>Popularity</th>
-                <th>Filepath</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
+        <div class="search-container">
+            <input type="text" id="song-search" placeholder="Search...">
+        </div>
+        <table id="search-results">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Upload Date</th>
+                    <th>Uploaded By</th>
+                    <th>Popularity</th>
+                    <th>Filepath</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table data goes here -->
+            </tbody>
+        </table>
     </div>
 
     <script src="{{ url_for('static', filename='search.js') }}"></script>

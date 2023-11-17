@@ -62,8 +62,8 @@ body {
 }
 .flash-messages-container {
     position: fixed; 
-    top: 40%; 
-    left: 30%; 
+    top: 85%; 
+    left: 50%; 
     transform: translateX(-50%); 
     z-index: 1000; 
     width: 100%; 

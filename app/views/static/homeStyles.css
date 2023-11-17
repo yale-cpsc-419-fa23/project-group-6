@@ -3,6 +3,22 @@ body {
     color: #ffffff; 
 }
 
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This will push the bottom part to the end */
+    height: 100vh; /* Full height of the viewport */
+}
+
+.bottom-links {
+    margin-top: auto; /* This pushes the container to the bottom */
+}
+
+/* Add this class to the bottom link items in your HTML */
+.bottom-links li {
+    padding-bottom: 20px; /* Optional padding for better spacing */
+}
+
 #search-results th {
     padding-left: 60px; 
     padding-right: 65px; 

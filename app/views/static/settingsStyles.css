@@ -49,8 +49,8 @@ body {
 }
 .flash-messages-container {
     position: fixed; 
-    top: 80%; 
-    left: 25%; 
+    top: 85%; 
+    left: 50%; 
     transform: translateX(-50%); 
     z-index: 1000; 
     width: 100%; 
@@ -61,4 +61,11 @@ body {
 .flashes .alert {
     display: inline-block;
     pointer-events: auto; 
+}
+.form-row-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.form-row-flex > div {
+    flex: 1; /* Each child takes equal space */
 }
