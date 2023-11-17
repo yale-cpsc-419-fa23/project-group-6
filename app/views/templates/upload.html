@@ -6,7 +6,6 @@
     <title>Upload Song - Your Music App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
-    <!-- Include the same CSS styles as in register.html -->
     <style>
         body, html {
             height: 100%;
@@ -37,16 +36,14 @@
             padding: 10px 20px;
         }
         .btn-secondary {
-            margin-top: 10px; /* Spacing above the button */
+            margin-top: 10px; 
         }
-        /* Additional styles as necessary */
     </style>
 </head>
 <body class="login">
     <div class="form-container">
         <div class="card">
             <div class="card-body">
-                <!-- Upload Song Form -->
                 <form action="{{ url_for('music.save_song') }}" method="post" enctype="multipart/form-data">
                     <h3 class="card-title text-center mb-4">Upload Song</h3>
                     <div class="form-group">
@@ -59,7 +56,6 @@
                     </div>
                     <div class="text-center">
                         <input type="submit" value="Upload" class="btn btn-primary btn-block">
-                        <!-- Go Back Button -->
                         <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
                     </div>
                 </form>
@@ -67,7 +63,6 @@
         </div>
     </div>
 
-    <!-- JavaScript Dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

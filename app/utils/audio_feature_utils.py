@@ -4,18 +4,18 @@ import random
 def audio_feature_extractor(audio_path):
     # Load audio file
     features = {
-        "explicit": random.randint(0, 1),
-        "mode": random.randint(0, 1),
-        "key": random.randint(0, 11),
-        "tempo": random.uniform(50, 200),
-        "energy": random.random(),
-        "danceability": random.random(),
-        "loudness": random.uniform(-60, 0),
-        "acousticness": random.random(),
-        "instrumentalness": random.random(),
-        "liveness": random.random(),
-        "speechiness": random.random(),
-        "valence": random.random(),
+        "Explicit": random.randint(0, 1),
+        "Mode": random.randint(0, 1),
+        "Key": random.randint(0, 11),
+        "Tempo": random.uniform(50, 200),
+        "Energy": random.random(),
+        "Danceability": random.random(),
+        "Loudness": random.uniform(-60, 0),
+        "Acousticness": random.random(),
+        "Instrumentalness": random.random(),
+        "Liveness": random.random(),
+        "Speechiness": random.random(),
+        "Valence": random.random(),
     }
     return features
 

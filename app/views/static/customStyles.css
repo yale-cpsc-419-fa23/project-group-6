@@ -1,13 +1,11 @@
-/* Reset some basic elements */
 body, h1, h2, h3, ul, li {
     margin: 0;
     padding: 0;
 }
 
-/* Sidebar styles */
 #sidebar {
     height: 100%;
-    width: 200px; /* Width of the sidebar */
+    width: 200px; 
     position: fixed;
     z-index: 1;
     top: 0;
@@ -17,18 +15,17 @@ body, h1, h2, h3, ul, li {
     padding-top: 20px;
 }
 
-/* Sidebar logo styles */
 #sidebar .logo img {
-    display: block; /* Ensures the logo is a block-level element for proper spacing */
-    width: 150px; /* Adjust as needed to control the size of the logo */
+    display: block;
+    width: 150px; 
     height: auto;
-    margin: 0 auto 20px; /* Centers the logo horizontally and adds space below */
+    margin: 0 auto 20px; 
 }
 
 #sidebar .logo {
-    display: block; /* Ensures the logo link is a block-level element */
-    text-align: center; /* Centers the logo within the sidebar */
-    margin-bottom: 10px; /* Additional space below the logo if needed */
+    display: block; 
+    text-align: center; 
+    margin-bottom: 10px; 
 }
 
 #sidebar ul {
@@ -47,7 +44,6 @@ body, h1, h2, h3, ul, li {
     color: #ffffff;
 }
 
-/* Search container */
 .search-container {
     position: fixed;
     width: 100%;
@@ -55,22 +51,22 @@ body, h1, h2, h3, ul, li {
     display: flex;
     justify-content: center;
     padding-top: 10px;
-    z-index: 2; /* To stay on top of other elements */
+    z-index: 2; 
     margin-left: 200px;
 }
 
 .background-logo {
-    position: absolute; /* Absolute position */
-    top: 50%; /* Center vertically */
-    left: 55%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Align center */
-    opacity: 0.2; /* Adjust the visibility */
-    z-index: -1; /* Place it behind the form */
+    position: absolute; 
+    top: 60%; 
+    left: 55%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2; 
+    z-index: -1; 
 }
 
 .search-container input[type="text"] {
     padding: 10px;
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 17px;
     border: none;
     outline: none;
@@ -81,17 +77,15 @@ body, h1, h2, h3, ul, li {
     font-size: 17px;
     border: none;
     cursor: pointer;
-    background-color: #333333; /* Dark background for the input and button */
+    background-color: #333333;
     color: #ffffff;
 }
 
-/* Main content */
 .main-content {
-    margin-left: 200px; /* Same as sidebar width */
+    margin-left: 200px; 
     padding: 60px 10px;
 }
 
-/* Fixed bottom audio player */
 .fixed-bottom {
     padding: 10px 0;
 }
@@ -102,26 +96,23 @@ body, h1, h2, h3, ul, li {
     position: absolute;
 }
 
-/* Add some color to the links */
 #sidebar ul li a:hover, .search-container button:hover {
-    background-color: #575757; /* Dark grey */
+    background-color: #575757; 
     color: white;
 }
 
-/* Audio player styles */
 audio {
-    width: 100%; /* Full width */
+    width: 100%; 
 }
 
 @media screen and (max-height: 450px) {
     #sidebar {padding-top: 15px;}
     #sidebar ul li a {font-size: 18px;}
 }
-/* login.html */
-/* General styles for the logo on login page */
+
 body.login img.logo {
-    max-height: 110px; /* Adjust this value to control the size of the logo on the login page */
-    margin-bottom: 20px; /* Provides space below the logo */
+    max-height: 110px;
+    margin-bottom: 20px;
 }
 body.login{
     background-color: #1a1a1a;
@@ -140,12 +131,20 @@ body.login{
 .logo-container {
     background-color: #0b0909;
 }
+.btn-settings {
+    font-size: 21px !important; 
+    padding: 10px 20px !important;
+    margin-top: 250px !important; 
+    display: block !important; 
+    width: auto !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
 .btn-logout {
-    font-size: 21px !important; /* Smaller font size */
-    padding: 10px 20px !important; /* Smaller padding */
-    margin-top: 250px !important; /* Push down the button */
-    display: block !important; /* Change to block to apply margin */
-    width: auto !important; /* Ensure the button is only as wide as its content */
+    font-size: 21px !important;
+    padding: 10px 20px !important; 
+    display: block !important;
+    width: auto !important; 
     margin-left: auto !important;
     margin-right: auto !important;
 }

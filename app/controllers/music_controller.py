@@ -1,10 +1,11 @@
-import os
-
-from flask import Blueprint, jsonify, request, render_template, redirect, flash, current_app, url_for
+from flask import Blueprint, jsonify, request, render_template, redirect, flash, current_app, url_for, session
 from werkzeug.utils import secure_filename
 import os
 
 from app.models.song import Song
+from app.models.user import User
+from app.models.genre import Genre
+from app.models.user_song_create import UserSongCreate
 from app.utils.audio_feature_utils import audio_feature_extractor
 
 ALLOWED_EXTENSIONS = {'mp3', 'wav', 'flac'}
@@ -22,10 +23,11 @@ def search():
 
     songs = Song.search_by_name(song_name, increment_popularity, limit=10 if not increment_popularity else 100)
     songs_json = [
-        {"name": song.name,
-         "filepath": song.filepath,
-         "upload_date": song.upload_date.strftime('%Y-%m-%d', ),
-         "popularity": song.popularity,
+        {"name": song.get_name(),
+         "filepath": song.get_file_path(),
+         "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
+         "upload_user": song.get_creators()[0].get_username(),
+         "popularity": song.get_popularity(),
          } for song in songs]
 
     return jsonify(songs_json)
@@ -59,17 +61,74 @@ def save_song():
         features = audio_feature_extractor(file_path)
         # features = {}
         song_details = {
-            "name": request.form['name'],
-            "filepath": file_path
+            "Name": request.form['name'],
+            "Filepath": file_path
         }
         song_data = {**song_details, **features}
 
         with current_app.app_context():
             # Add the song to the database
-            song = Song.create(**song_data)
+            song = Song.create(session.get("user_id"), **song_data) #TODO: Add user_id to the function call
 
         flash('File successfully uploaded', 'success')
         return redirect(url_for('main.home'))
     else:
         flash('Allowed file types are mp3, wav, and flac', 'danger')
         return redirect(request.url)
+
+
+@music.route('/my-songs')
+def my_songs():
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    user_id = session['user_id']
+    user = User.find_by_id(user_id)
+    songs = user.get_created_songs()
+
+    return render_template('my_songs.html', songs=songs)
+
+
+@music.route('/rename-song/<int:song_id>', methods=['POST'])
+def rename_song(song_id):
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    song_to_rename = Song.query.get(song_id)
+    new_name = request.form['new_name']
+
+    if song_to_rename:
+        song_to_rename.rename(new_name)
+        flash('Song renamed successfully.')
+    else:
+        flash('Song not found.')
+
+    return redirect(url_for('music.my_songs'))
+
+
+@music.route('/search-genre', methods=['GET'])
+def search_genre():
+    genre_name = request.args.get('genre_name')
+    genres = Genre.find_by_name(genre_name)
+    genres_json = [{"Name": genre.get_genre_name()} for genre in genres]
+    return jsonify(genres_json)
+
+
+@music.route('/top-songs-by-genre', methods=['GET'])
+def top_songs_by_genre():
+    genre_name = request.args.get('genre')
+    top_songs = Genre.get_top_songs(genre_name, limit=20)
+
+    if top_songs:
+        songs_json = [
+            {
+                "name": song.get_name(),
+                "upload_user": song.get_creators()[0].get_username(),
+                "popularity": song.get_popularity()
+            } for song in top_songs
+        ]
+        return jsonify(songs_json)
+    else:
+        return jsonify([])

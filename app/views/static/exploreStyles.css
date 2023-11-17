@@ -1,0 +1,56 @@
+.top-songs-title {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.top-songs-container {
+    max-height: 40vh;
+    overflow-y: auto;
+    margin: 20px auto;
+    width: 80%;
+}
+
+#top-songs {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#top-songs th, #top-songs td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.genre-search-container {
+    text-align: center;
+}
+
+#genre-search {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#genre-search-results p {
+    cursor: pointer;
+    color: #007bff; /* Adjust the color as needed */
+}
+
+#genre-search-results p:hover {
+    text-decoration: underline;
+}
+
+#top-songs-by-genre {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#top-songs-by-genre th, #top-songs-by-genre td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#top-songs tr:nth-child(even) {background-color: #f2f2f2;}
+#top-songs-by-genre tr:nth-child(even) {background-color: #f2f2f2;}

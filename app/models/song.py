@@ -1,81 +1,131 @@
 import random
 from datetime import datetime
-from app.utils.audio_feature_utils import audio_feature_extractor
-
-from app import db, create_app
-
+from sqlalchemy.sql.expression import func
+from app import db
+from app.models.user_song_create import UserSongCreate
+from app.models.genre import Genre
 
 class Song(db.Model):
-    songId = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
-    upload_date = db.Column(db.DateTime)
-    duration_ms = db.Column(db.Integer)
-    explicit = db.Column(db.Integer)
-    mode = db.Column(db.Integer)
-    key = db.Column(db.Integer)
-    tempo = db.Column(db.Float)
-    energy = db.Column(db.Float)
-    danceability = db.Column(db.Float)
-    loudness = db.Column(db.Float)
-    acousticness = db.Column(db.Float)
-    instrumentalness = db.Column(db.Float)
-    liveness = db.Column(db.Float)
-    speechiness = db.Column(db.Float)
-    valence = db.Column(db.Float)
-    popularity = db.Column(db.Integer)
-    filepath = db.Column(db.Text)
+    SongId = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.Text)
+    Duration_ms = db.Column(db.Integer)
+    Explicit = db.Column(db.Integer)
+    Mode = db.Column(db.Integer)
+    Key = db.Column(db.Integer)
+    Tempo = db.Column(db.Float)
+    Energy = db.Column(db.Float)
+    Danceability = db.Column(db.Float)
+    Loudness = db.Column(db.Float)
+    Acousticness = db.Column(db.Float)
+    Instrumentalness = db.Column(db.Float)
+    Liveness = db.Column(db.Float)
+    Speechiness = db.Column(db.Float)
+    Valence = db.Column(db.Float)
+    Popularity = db.Column(db.Integer)
+    Filepath = db.Column(db.Text)
+    genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
+    create_records = db.relationship('UserSongCreate', backref='song')
+    like_records = db.relationship('UserSongLike', backref='song')
 
     def __repr__(self):
-        return f"<Song {self.songId}>"
+        return f"<Song {self.SongId}>"
 
     @classmethod
-    def create(cls, **kwargs):
-        song = cls(upload_date=datetime.now(), popularity=0, **kwargs)
+    def create(cls, user_id, **kwargs):
+        song = cls(Popularity=0, **kwargs)
         db.session.add(song)
         db.session.commit()
+        user_song = UserSongCreate(UserId=user_id, SongId=song.SongId, UploadDate=datetime.now(),
+                                   EditDate=datetime.now())
+        db.session.add(user_song)
+        db.session.commit()
+
         return song
 
     @classmethod
-    def search_by_id(cls, song_id):
+    def search_by_id(cls, song_id, increment_popularity=False):
         song = db.session.get(cls, song_id)
-        if song:
-            song.popularity += 1
+        if song and increment_popularity:
+            song.Popularity += 1
             db.session.commit()
         return song
 
     @classmethod
     def search_by_name(cls, name, increment_popularity=False, limit=100):
-        query = cls.query.filter(cls.name.ilike(f"%{name}%"))
+        query = cls.query.filter(cls.Name.ilike(f"%{name}%"))
 
         if increment_popularity:
             for song in query.all():
-                song.popularity += 1
+                song.Popularity += 1
             db.session.commit()
 
-        query = query.order_by(cls.popularity.desc())
+        query = query.order_by(cls.Popularity.desc())
         if limit:
             query = query.limit(limit)
 
         return query.all()
 
+    @classmethod
+    def get_songs_by_ids(cls, song_ids):
+        if not song_ids:
+            return []
+        return cls.query.filter(cls.SongId.in_(song_ids)).all()
+    
+    @classmethod
+    def get_top_songs(cls, limit=20):
+        return cls.query.order_by(cls.Popularity.desc()).limit(limit).all()
 
-if __name__ == "__main__":
-    audio_path = "app/static/uploads/sample-12s.mp3"
-    features = audio_feature_extractor(audio_path)
-    song_details = {
-        "name": "Song Name Here",
-        "duration_ms": 200000,  # Example duration in ms
-        "filepath": audio_path
-    }
-    song_data = {**song_details, **features}
-    app = create_app('DevelopmentConfig')
-    with app.app_context():
-        # add song example
-        S = Song()
-        print(S.create(**song_data))
-        # search song by name example
-        matching_songs = Song.search_by_name("Song Name Here", limit=10)
-        for song in matching_songs:
-            print(song.name)
-        # query song by id example
-        print(song.search_by_id(1).name)
+    @classmethod
+    def get_all_songs(cls, n=None):
+        if n is None:
+            return db.session.query(cls).all()
+        return db.session.query(cls).order_by(func.random()).limit(n).all()
+    
+    def rename(self, name):
+        self.Name = name
+
+        user_song_records = self.create_records
+        for record in user_song_records:
+            record.EditDate = datetime.now()
+
+        db.session.commit()
+
+    def get_upload_date(self):
+        if self.create_records:
+            return min(record.UploadDate for record in self.create_records)
+        return None
+
+    def get_name(self):
+        return self.Name
+
+    def get_popularity(self):
+        return self.Popularity
+
+    def get_file_path(self):
+        return self.Filepath
+
+    def get_genres(self):
+        return self.genres
+
+    def get_creators(self):
+        return [record.get_creator() for record in self.create_records]
+
+    def get_id(self):
+        return self.SongId
+
+    def add_creators(self, user_ids):
+        for user_id in user_ids:
+            existing_record = UserSongCreate.query.filter_by(UserId=user_id, SongId=self.SongId).first()
+            if not existing_record:
+                user_song = UserSongCreate(UserId=user_id, SongId=self.SongId,
+                                           UploadDate=datetime.now(), EditDate=datetime.now())
+                db.session.add(user_song)
+            else:
+                existing_record.EditDate = datetime.now()
+        db.session.commit()
+
+    def add_genres(self, genres):
+        for genre in genres:
+            if genre not in self.genres:
+                self.genres.append(genre)
+        db.session.commit()

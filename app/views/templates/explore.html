@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='exploreStyles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <h2 class="top-songs-title">Top 20 Popular Songs</h2>
+        <div class="top-songs-container">
+            <table id="top-songs">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Uploaded By</th>
+                        <th>Popularity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for song in top_songs %}
+                    <tr>
+                        <td>{{ song.get_name() }}</td>
+                        <td>{{ song.get_creators()[0].get_username() }}</td>
+                        <td>{{ song.get_popularity() }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <h2 class="top-songs-title">Discover By Genre</h2>
+        <div class="genre-search-container">
+            <input type="text" id="genre-search" placeholder="Type a Genre...">
+            <div id="genre-search-results">
+            </div>
+        </div>
+
+        <h3 id="top-songs-by-genre-title" class="top-songs-title"></h3>
+        <div class="top-songs-container">
+            <table id="top-songs-by-genre">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Uploaded By</th>
+                        <th>Popularity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
+
+    <script src="{{ url_for('static', filename='explore.js') }}"></script>
+</body>
+</html>

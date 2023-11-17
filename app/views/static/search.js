@@ -35,6 +35,7 @@ $(document).ready(function() {
                             <tr>
                                 <td>${song.name}</td>
                                 <td>${song.upload_date}</td>
+                                <td>${song.upload_user}</td>
                                 <td>${song.popularity}</td>
                                 <td>${song.filepath}</td>
                             </tr>
