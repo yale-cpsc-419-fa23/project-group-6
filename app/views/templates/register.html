@@ -8,27 +8,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='registerStyles.css') }}">
 </head>
 <body class="login">
-    <div class="flash-messages-container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flashes">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-    </div>
-
     <div class="background-logo">
         <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
     </div>
+
     <div class="form-container">
         <div class="card">
             <div class="card-body">
+                <h3 class="card-title text-center mb-4">Register for Music</h3>
                 <form method="post">
                     {{ form.hidden_tag() }}
-                    <h3 class="card-title text-center mb-4">Register for Music</h3>
                     <div class="form-group">
                         {{ form.username.label(class='form-label') }}
                         {{ form.username(class='form-control') }}
@@ -49,10 +38,24 @@
                         {{ form.submit(class='btn btn-primary btn-block') }}
                     </div>
                 </form>
+
                 <div class="text-center mt-3">
                     <a href="{{ url_for('auth.login') }}" class="btn btn-link">Already have an account? Login</a>
                 </div>
             </div>
+        </div>
+
+        <!-- Flash messages container placed here, below the entire Register for Music card -->
+        <div class="flash-messages-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 
