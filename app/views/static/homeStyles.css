@@ -11,12 +11,9 @@ body {
 }
 
 .bottom-links {
-    margin-top: auto; /* This pushes the container to the bottom */
-}
-
-/* Add this class to the bottom link items in your HTML */
-.bottom-links li {
-    padding-bottom: 20px; /* Optional padding for better spacing */
+    margin-top: auto;
+    list-style: none;
+    padding-bottom: 40px;
 }
 
 #search-results th {
