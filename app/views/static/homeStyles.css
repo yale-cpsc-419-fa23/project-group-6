@@ -6,14 +6,19 @@ body {
 #sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* This will push the bottom part to the end */
-    height: 100vh; /* Full height of the viewport */
+    justify-content: space-between;
+    height: 100vh;
 }
 
 .bottom-links {
     margin-top: auto;
     list-style: none;
     padding-bottom: 40px;
+}
+
+#sidebar-bottom-links .btn {
+    font-size: 1.4em;
+    padding: 10px 15px;
 }
 
 #search-results th {

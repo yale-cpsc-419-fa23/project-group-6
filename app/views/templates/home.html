@@ -30,8 +30,7 @@
             <li><a href="#library">Library</a></li>
         </ul>
 
-        <!-- Bottom links -->
-        <ul class="bottom-links"> <!-- Added class -->
+        <ul class="bottom-links" id="sidebar-bottom-links">
             <li><a href="{{ url_for('settings.user_settings') }}" class="btn btn-primary" id="btn-settings">Settings</a></li>
             <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary" id="btn-logout">Logout</a></li>
         </ul>
@@ -66,7 +65,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Table data goes here -->
+
             </tbody>
         </table>
     </div>
