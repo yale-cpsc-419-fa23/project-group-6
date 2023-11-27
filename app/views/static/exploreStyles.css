@@ -1,21 +1,19 @@
 body, h1, h2, h3, ul, li {
     margin: 0;
     padding: 0;
-    color: #ffffff; /* Matching text color from homeStyles.css */
+    color: #ffffff;
 }
 
 body {
-    background-color: #121212; /* Matching background color from homeStyles.css */
+    background-color: #121212;
 }
 
-/* Maintaining original styles for the top-songs-title */
 .top-songs-title {
     text-align: center;
-    color: #ffffff; /* Updated color to match homeStyles.css */
+    color: #ffffff;
     margin: 20px 0;
 }
 
-/* Maintaining original styles for the top-songs-container */
 .top-songs-container {
     max-height: 40vh;
     overflow-y: auto;
@@ -23,7 +21,6 @@ body {
     width: 80%;
 }
 
-/* Updating table styles to match homeStyles.css theme */
 #top-songs, #top-songs-by-genre {
     width: 100%;
     border-collapse: collapse;
@@ -33,46 +30,42 @@ body {
 #top-songs th, #top-songs td, #top-songs-by-genre th, #top-songs-by-genre td {
     border: 1px solid #ddd;
     padding: 8px;
-    background-color: #333333; /* Dark background for table cells */
-    color: #ffffff; /* White text color for table cells */
+    background-color: #333333;
+    color: #ffffff;
 }
 
-/* Maintaining original styles for the genre search container */
 .genre-search-container {
     text-align: center;
 }
 
-/* Updating styles for genre search input to match homeStyles.css theme */
 #genre-search {
     width: 80%;
     padding: 10px;
     margin-bottom: 20px;
-    background-color: #333333; /* Dark background for search input */
-    color: #ffffff; /* White text color for search input */
-    border: 2px solid #ccc; /* Border color (adjust as needed) */
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #ccc;
     border-radius: 4px;
 }
 
 #genre-search-results p {
     cursor: pointer;
-    color: #a8d1fb; /* Blue color for search results text */
+    color: #a8d1fb;
 }
 
 #genre-search-results p:hover {
     text-decoration: underline;
 }
 
-/* Styling for zebra striping in tables */
 #top-songs tr:nth-child(even), #top-songs-by-genre tr:nth-child(even) {
-    background-color: #454545; /* Darker background for even rows */
+    background-color: #454545;
 }
 
 .btn-secondary.btn-block {
-    left: 0; /* Align to the left */
-    bottom: 0; /* Align to the bottom */
-    color: #c0c3d4; /* White text for readability */
+    left: 0;
+    bottom: 0;
+    color: #c0c3d4;
     padding: 10px 15px;
     border-radius: 5px;
-    font-size: 18px; /* Adjust font size as needed */
+    font-size: 18px;
 }
-

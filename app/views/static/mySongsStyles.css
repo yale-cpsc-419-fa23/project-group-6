@@ -14,7 +14,6 @@ h1 {
     margin: 20px 0;
 }
 
-
 #search-results {
     width: 80%;
     margin: 20px auto;
@@ -66,26 +65,27 @@ h1 {
 }
 
 .btn-secondary.btn-block {
-    background-color: #7a7979; /* Blue background color */
-    color: #ffffff; /* White text color */
+    background-color: #7a7979;
+    color: #ffffff;
     text-align: center;
-    padding: 10px 12px; /* Reduced padding for a smaller button */
-    border-radius: 4px; /* Adjusted border radius for a smaller button */
+    padding: 10px 12px;
+    border-radius: 4px;
     display: block;
-    width: auto; /* Auto width for content fit */
-    margin: 10px; /* Adjusted margin */
+    width: auto;
+    margin: 10px;
     text-decoration: none;
-    font-size: 16px; /* Smaller font size */
+    font-size: 16px;
     border: none;
     transition: background-color 0.3s ease;
     position: absolute;
-    left: 10px; /* Positioning a bit away from the corner */
+    left: 10px;
     bottom: 10px;
 }
 
 .btn-secondary.btn-block:hover {
     background-color: #505051;
 }
+
 .background-logo {
     position: absolute;
     top: 60%;
@@ -94,4 +94,3 @@ h1 {
     opacity: 0.2;
     z-index: -1;
 }
-
