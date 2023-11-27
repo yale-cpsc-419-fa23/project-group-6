@@ -1,6 +1,16 @@
+body, h1, h2, h3, ul, li {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
 body {
-    background-color: #121212; 
-    color: #ffffff; 
+    background-color: #121212;
+}
+.dynamic-search-results a {
+    text-decoration: underline; /* Underlines the links */
+    color: #ffffff; /* Sets the text color */
+    /* Add other styling as needed */
 }
 
 #sidebar {
@@ -8,6 +18,44 @@ body {
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #232323;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+#sidebar .logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 0 auto 20px;
+}
+
+#sidebar .logo {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+}
+
+#sidebar ul li a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #bbbbbb;
+    display: block;
+}
+
+#sidebar ul li a:hover, .search-container button:hover {
+    color: #ffffff;
+    background-color: #575757;
 }
 
 .bottom-links {
@@ -21,21 +69,31 @@ body {
     padding: 10px 15px;
 }
 
-#search-results th {
-    padding-left: 60px; 
-    padding-right: 65px; 
-    text-align: left;
+.search-container {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    z-index: 2;
+    margin-left: 200px;
 }
 
-.search-bar {
-    width: 100%;
+.search-container input[type="text"] {
     padding: 10px;
-    margin-bottom: 20px; 
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #333333; 
+    margin-right: 5px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: #333333;
     color: #ffffff;
+}
+
+#search-results th, #search-results td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 #search-results th {
@@ -43,17 +101,34 @@ body {
     color: #ffffff;
 }
 
-
-#search-results th, #search-results td {
-    padding: 15px; 
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
 #search-results tr:hover {
     background-color: #454545;
 }
 
-.results-container {
-    padding: 0 20px;
+.background-logo {
+    position: absolute;
+    top: 60%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.main-content {
+    margin-left: 200px;
+    padding: 60px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    #sidebar {padding-top: 15px;}
+    #sidebar ul li a {font-size: 18px;}
+}
+
+body.login {
+    background-color: #1a1a1a;
+}
+
+body.login img.logo {
+    max-height: 110px;
+    margin-bottom: 20px;
 }
