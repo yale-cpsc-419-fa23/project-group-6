@@ -1,0 +1,87 @@
+body, h1, h2, h3, ul, li {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+body {
+    background-color: #121212;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+#search-results {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#search-results th, #search-results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+#search-results tr:nth-child(even) {
+    background-color: #454545;
+}
+
+.btn-rename, .btn-save, .btn-cancel {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.btn-rename {
+    background-color: #47a45c;
+}
+
+.btn-rename:hover {
+    background-color: #218838;
+}
+
+.btn-save, .btn-cancel {
+    background-color: #4a90e2;
+}
+
+.btn-save:hover, .btn-cancel:hover {
+    background-color: #357ab8;
+}
+
+.rename-input {
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+}
+
+.btn-secondary.btn-block {
+    background-color: #7a7979; /* Blue background color */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    padding: 10px 12px; /* Reduced padding for a smaller button */
+    border-radius: 4px; /* Adjusted border radius for a smaller button */
+    display: block;
+    width: auto; /* Auto width for content fit */
+    margin: 10px; /* Adjusted margin */
+    text-decoration: none;
+    font-size: 16px; /* Smaller font size */
+    border: none;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    left: 10px; /* Positioning a bit away from the corner */
+    bottom: 10px;
+}
+
+.btn-secondary.btn-block:hover {
+    background-color: #505051;
+}
