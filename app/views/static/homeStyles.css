@@ -105,14 +105,6 @@ body {
     background-color: #454545;
 }
 
-.background-logo {
-    position: absolute;
-    top: 60%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    opacity: 0.2;
-    z-index: -1;
-}
 
 .main-content {
     margin-left: 200px;
@@ -131,4 +123,13 @@ body.login {
 body.login img.logo {
     max-height: 110px;
     margin-bottom: 20px;
+}
+
+.background-logo {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    z-index: -1;
 }
