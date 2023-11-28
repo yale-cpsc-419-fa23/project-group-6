@@ -22,7 +22,6 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 - Metadata editing for track information.
 - Basic recommendation system initiation.
 - Genre exploration introduction.
-- Front-end visualization for album art.
 
 ### 3. Optional Deliverable: Recommendation System Enhancement (Due: Nov 26)
 - Optimization of the recommendation engine for faster and more accurate results.
@@ -60,27 +59,31 @@ Due to size constraints, we've stored our datasets on Google Drive. Access the d
 ```
 /music_recommendation_mvc
 |-- /app
-|   |-- __init__.py
-|   |-- /models
-|   |   |-- __init__.py
-|   |-- /views
-|   |   |-- __init__.py
-|   |   |-- base.html
-|   |   |-- index.html
-|   |   |-- upload.html
-|   |   |-- recommendations.html
 |   |-- /controllers
 |   |   |-- __init__.py
+|   |   |-- auth_controller.py
 |   |   |-- main_controller.py
-|   |   |-- upload_controller.py
+|   |   |-- music_controller.py
 |   |   |-- recommendation_controller.py
-|   |-- /static
-|   |   |-- /css
-|   |   |-- /js
-|   |   |-- /uploads
+|   |-- /models
+|   |   |-- __init__.py
+|   |   |-- song_tag.py
+|   |   |-- song.py
+|   |   |-- tag.py
+|   |   |-- user_song_create.py
+|   |   |-- user_song_like.py
+|   |   |-- user_user_follow.py
+|   |   |-- user.py
 |   |-- /utils
 |   |   |-- __init__.py
+|   |   |-- audio_feature_utils.py
 |   |   |-- recommendation_utils.py
+|   |-- /views
+|   |   |-- /static
+|   |   |-- /templates
+|   |   |-- __init__.py
+|   |   |-- forms.py
+|   |-- __init__.py
 |   |-- config.py
 |-- run.py
 |-- requirements.txt

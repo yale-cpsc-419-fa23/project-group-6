@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Songs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mySongsStyles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+
+    <div class="main-content">
+        <h1>My Songs</h1>
+        <table id="search-results">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Upload Date</th>
+                    <th>Popularity</th>
+                    <th>Filepath</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                <tr>
+                    <td>{{ song.get_name() }}</td>
+                    <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
+                    <td>{{ song.get_popularity() }}</td>
+                    <td>{{ song.get_file_path() }}</td>
+                    <td>
+                        <button class="btn-rename" onclick="showRenameField(this)">Rename</button>
+                        <form method="post" action="{{ url_for('music.rename_song', song_id=song.SongId) }}" class="rename-form">
+                            <input type="text" name="new_name" class="rename-input" value="{{ song.name }}" required>
+                            <input type="submit" value="Save" class="btn-save">
+                            <button type="button" class="btn-cancel" onclick="cancelRename(this)">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
+
+    <script>
+        function showRenameField(button) {
+            var form = $(button).next('form');
+            form.find('.rename-input, .btn-save, .btn-cancel').show();
+            $(button).hide();
+        }
+
+        function cancelRename(button) {
+            var form = $(button).closest('form');
+            form.find('.rename-input, .btn-save, .btn-cancel').hide();
+            form.prev('.btn-rename').show();
+        }
+
+        $(document).ready(function() {
+            $('.rename-input, .btn-save, .btn-cancel').hide();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+body, h1, h2, h3, ul, li {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+body {
+    background-color: #121212;
+}
+
+.top-songs-title {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+.top-songs-container {
+    max-height: 40vh;
+    overflow-y: auto;
+    margin: 20px auto;
+    width: 80%;
+}
+
+#top-songs, #top-songs-by-genre {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#top-songs th, #top-songs td, #top-songs-by-genre th, #top-songs-by-genre td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.genre-search-container {
+    text-align: center;
+}
+
+#genre-search {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+#genre-search-results p {
+    cursor: pointer;
+    color: #a8d1fb;
+}
+
+#genre-search-results p:hover {
+    text-decoration: underline;
+}
+
+#top-songs tr:nth-child(even), #top-songs-by-genre tr:nth-child(even) {
+    background-color: #454545;
+}
+
+.btn-secondary.btn-block {
+    left: 0;
+    bottom: 0;
+    color: #c0c3d4;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+}

@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add the logo to the title bar -->
     <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}">
     <title>Login - Your Music App</title>
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
-    <!-- Button Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonStyles.css') }}">
-    <!-- Bootstrap for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body class="login">
-    <!-- Flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul class="flashes">
@@ -23,18 +18,15 @@
         {% endif %}
     {% endwith %}
     
-    <!-- Logo -->
     <div class="logo-container">
         <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo login-logo" alt="logo">
     </div>
 
-    <!-- Login Container -->
     <div class="search">r
         <div class="row justify-content-center align-items-cente" style="height: 100vh;"> 
             <div class="col-md-6">
                 <div class="card bg-secondary mt-5">
                     <div class="card-body">
-                        <!-- Login Form -->
                         <form method="post">
                             {{ form.hidden_tag() }}
                             <div class="form-group">
@@ -53,7 +45,6 @@
                                 {{ form.submit(class='btn btn-primary') }}
                             </div>
                         </form>
-                        <!-- Register Link -->
                         <a href="{{ url_for('auth.register') }}" class="btn btn-link text-white">Register</a>
                     </div>
                 </div>
@@ -61,7 +52,6 @@
         </div>
     </div>
 
-    <!-- JavaScript Dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

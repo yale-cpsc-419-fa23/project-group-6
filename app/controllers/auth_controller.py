@@ -13,7 +13,7 @@ def login():
     if form.validate_on_submit():
         user = User.find_by_email(form.email.data)
         if user and user.check_password(form.password.data):
-            session['user_id'] = user.userId
+            session['user_id'] = user.UserId
             flash('Logged in successfully.', 'success')
             return redirect(url_for('main.home'))
         flash('Invalid username or password.', 'danger')

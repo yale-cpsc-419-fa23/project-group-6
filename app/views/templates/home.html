@@ -4,28 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <!-- Add jQuery for AJAX functionality -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='customStyles.css') }}">
-    <!-- Make sure to include the home styles as well -->
     <link rel="stylesheet" href="{{ url_for('static', filename='homeStyles.css') }}">
+
+    <style>
+        #search-results th {
+            padding-left: 80px;
+            padding-right: 80px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
     <div id="sidebar" class="nav">
-        <!-- Logo -->
         <a href="#home" class="logo">
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Your Logo">
         </a>
-        <!-- Navigation Links -->
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#explore">Explore</a></li>
-            <li><a href="#library">Library</a></li>
+            <li><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li><a href="{{ url_for('main.explore') }}" class="btn btn-primary">Explore</a></li>
             <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload Song</a></li>
-            <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-logout">Logout</a></li>
+            <li><a href="{{ url_for('music.my_songs') }}" class="btn btn-primary">My Songs</a></li>
+            <li><a href="#library">Library</a></li>
+        </ul>
+
+        <ul class="bottom-links" id="sidebar-bottom-links">
+            <li><a href="{{ url_for('settings.user_settings') }}" class="btn btn-primary" id="btn-settings">Settings</a></li>
+            <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary" id="btn-logout">Logout</a></li>
         </ul>
     </div>
 
@@ -33,49 +39,36 @@
         <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
     </div>
     
-    <!-- Main Content Area -->
     <div class="main-content">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <ul class="flashes" style="margin-left: 20px;">
-          {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes" style="margin-left: 20px;">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
 
-      <!-- Search Bar -->
-      <div class="search-container">
-          <input type="text" id="song-search" placeholder="Search...">
-          <!-- <button id="search-button">Search</button> -->
-      </div>
-      <!-- Your main content goes here -->
-      <!-- Ensure the table is outside of the search-container div so that it doesn't interfere with its layout -->
-      <table id="search-results">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Upload Date</th>
-                <th>Popularity</th>
-                <th>Filepath</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Rows will be populated here by the JavaScript -->
-        </tbody>
-      </table>
+        <div class="search-container">
+            <input type="text" id="song-search" placeholder="Search...">
+        </div>
+        <table id="search-results">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Upload Date</th>
+                    <th>Uploaded By</th>
+                    <th>Popularity</th>
+                    <th>Filepath</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
 
-    <!-- Audio Player -->
-    <div class="fixed-bottom bg-dark">
-        <audio controls class="w-100">
-            <!-- Audio player here -->
-        </audio>
-    </div>
-
-    <!-- Scripts -->
-    <!-- Add the search.js file which contains the AJAX call for the search functionality -->
     <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>
