@@ -1,5 +1,6 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+import random
 
 from app import db
 from app.models.user_song_like import UserSongLike
@@ -88,7 +89,8 @@ class User(db.Model):
         return [record.get_song() for record in self.create_records]
 
     def get_liked_songs(self, n_likes):
-        return [record.get_song() for record in self.like_records[:n_likes]]
+        like_records = random.sample(self.like_records, min(n_likes, len(self.like_records)))
+        return [record.get_song() for record in like_records]
 
     # info update
     def update_username(self, new_username):
