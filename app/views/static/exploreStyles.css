@@ -21,13 +21,13 @@ body {
     width: 80%;
 }
 
-#top-songs, #top-songs-by-genre {
+#top-songs, #top-songs-by-genre, #recommended-songs {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
 
-#top-songs th, #top-songs td, #top-songs-by-genre th, #top-songs-by-genre td {
+#top-songs th, #top-songs td, #top-songs-by-genre th, #top-songs-by-genre td, #recommended-songs th, #recommended-songs td {
     border: 1px solid #ddd;
     padding: 8px;
     background-color: #333333;
