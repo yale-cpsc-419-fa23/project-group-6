@@ -23,6 +23,7 @@ class Song(db.Model):
     Valence = db.Column(db.Float)
     Popularity = db.Column(db.Integer)
     Filepath = db.Column(db.Text)
+    Cluster = db.Column(db.Integer)
     genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
     create_records = db.relationship('UserSongCreate', backref='song')
     like_records = db.relationship('UserSongLike', backref='song')
@@ -128,4 +129,8 @@ class Song(db.Model):
         for genre in genres:
             if genre not in self.genres:
                 self.genres.append(genre)
+        db.session.commit()
+
+    def set_cluster(self, cluster):
+        self.Cluster = cluster
         db.session.commit()
