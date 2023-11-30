@@ -36,13 +36,15 @@ def recommend_songs(user_id, n_likes=5, n_recommendations=5, n_samples=100):
     user = User.find_by_id(user_id)
     liked_songs = [song.get_id() for song in user.get_liked_songs(n_likes)]
     if len(liked_songs) == 0:
-        return None
+        return "You have not liked any songs yet. Please like some songs to get recommendations.", None
     songs = Song.get_all_songs()
     songs_data = [song.__dict__ for song in songs]
     songs_df = pd.DataFrame(songs_data)
     songs_df = songs_df.drop('_sa_instance_state', axis=1)
     recommended_songs = recommend_songs_helper(songs_df, liked_songs, n_recommendations, n_samples)
-    return Song.get_songs_by_ids(recommended_songs)
+    if len(recommended_songs) == 0:
+        return "You have explored all available music, no recommendations available", None
+    return "", Song.get_songs_by_ids(recommended_songs)
 
 
 def recommend_songs_helper(songs_df, liked_songs, n_recommendations, n_samples):

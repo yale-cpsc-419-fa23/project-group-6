@@ -19,6 +19,9 @@ def explore():
         return redirect(url_for('auth.login'))
     
     top_songs = Song.get_top_songs()
-    recommended_songs = recommend_songs(session['user_id'], n_likes=5, n_recommendations=5)
-    return render_template('explore.html', top_songs=top_songs, recommended_songs=recommended_songs)
+    recommendation_info, recommended_songs = recommend_songs(session['user_id'], n_likes=5, n_recommendations=5)
+    return render_template('explore.html',
+                           top_songs=top_songs,
+                           recommended_songs=recommended_songs,
+                           recommendation_info=recommendation_info)
 

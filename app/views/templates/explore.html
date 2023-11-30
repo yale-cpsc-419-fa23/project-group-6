@@ -9,32 +9,36 @@
 </head>
 <body>
     <div class="main-content">
-        <h2 class="recommendations-title">Recommended for You</h2>
-        <div class="top-songs-container">
-            <table id="recommended-songs">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Artist</th>
-                        <th>Popularity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for song in recommended_songs %}
-                    <tr>
-                        <td>{{ song.get_name() }}</td>
-                        <td>
-                            {% for creator in song.get_creators() %}
-                                {{ creator.get_username() }}
-                                {% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>{{ song.get_popularity() }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        {% if recommended_songs %}
+            <h2 class="recommendations-title">Recommended for You</h2>
+            <div class="top-songs-container">
+                <table id="recommended-songs">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Artist</th>
+                            <th>Popularity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in recommended_songs %}
+                        <tr>
+                            <td>{{ song.get_name() }}</td>
+                            <td>
+                                {% for creator in song.get_creators() %}
+                                    {{ creator.get_username() }}
+                                    {% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ song.get_popularity() }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>{{ recommendation_info }}</p>
+        {% endif %}
 
         <h2 class="top-songs-title">Top 20 Popular Songs</h2>
         <div class="top-songs-container">
