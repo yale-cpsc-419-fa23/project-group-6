@@ -6,6 +6,8 @@ from app.utils.recommendation_utils import recommend_songs
 
 from app.utils.audio_feature_utils import audio_feature_extractor
 
+
+
 if __name__ == "__main__":
     app = create_app('DevelopmentConfig')
     with app.app_context():
