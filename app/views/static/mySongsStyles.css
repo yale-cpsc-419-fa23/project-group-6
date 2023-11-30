@@ -42,11 +42,11 @@ h1 {
 }
 
 .btn-rename {
-    background-color: #47a45c;
+    background-color: #6fb2d8;
 }
 
 .btn-rename:hover {
-    background-color: #218838;
+    background-color: #6fb2d8;
 }
 
 .btn-save, .btn-cancel {
