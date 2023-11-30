@@ -50,6 +50,8 @@ def recommend_songs(user_id, n_likes=5, n_recommendations=5, n_samples=100):
 def recommend_songs_helper(songs_df, liked_songs, n_recommendations, n_samples):
     liked_songs_df = songs_df.loc[songs_df['SongId'].isin(liked_songs)]
     candidate_songs_df = songs_df.loc[~songs_df['SongId'].isin(liked_songs)]
+    if len(candidate_songs_df) == 0:
+        return []
     n_recommendations = min(n_recommendations, len(candidate_songs_df), n_samples)
     if len(candidate_songs_df) < n_samples:
         candidate_songs_df = candidate_songs_df.sample(n=n_samples, replace=True)
@@ -82,9 +84,9 @@ def recommend_by_similarity(liked_songs_df, candidate_songs_df, n_recommendation
 def recommend_songs_by_cluster(liked_songs_df, candidate_songs_df, n_recommendations):
     liked_clusters = liked_songs_df['Cluster'].unique()
     recommended_songs = candidate_songs_df[candidate_songs_df['Cluster'].isin(liked_clusters)]
-
+    if len(recommended_songs) == 0:
+        return []
     available_recommendations = len(recommended_songs)
-
     if available_recommendations < n_recommendations:
         n_recommendations = available_recommendations
     return recommended_songs.sample(n=n_recommendations)['SongId'].values.tolist()
