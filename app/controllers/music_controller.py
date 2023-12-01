@@ -122,7 +122,7 @@ def rename_song(song_id):
     else:
         flash('Song not found.')
 
-    return redirect(url_for('music.my_songs'))
+    return redirect(url_for('music.uploaded_songs'))
 
 
 @music.route('/search-genre', methods=['GET'])
