@@ -2,15 +2,13 @@ body, h1, h2, h3, ul, li {
     margin: 0;
     padding: 0;
     color: #ffffff;
+    background-color: #121212;
+    font-family: Arial, sans-serif;
 }
 
-body {
-    background-color: #121212;
-}
 .dynamic-search-results a {
-    text-decoration: underline; /* Underlines the links */
-    color: #ffffff; /* Sets the text color */
-    /* Add other styling as needed */
+    text-decoration: underline;
+    color: #ffffff;
 }
 
 #sidebar {
@@ -20,12 +18,18 @@ body {
     height: 100vh;
     width: 230px;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: 0;
     background-color: #232323;
     overflow-x: hidden;
     padding-top: 20px;
+    z-index: 1;
+}
+
+#sidebar .logo {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 #sidebar .logo img {
@@ -33,12 +37,6 @@ body {
     width: 150px;
     height: auto;
     margin: 0 auto 20px;
-}
-
-#sidebar .logo {
-    display: block;
-    text-align: center;
-    margin-bottom: 10px;
 }
 
 #sidebar ul {
@@ -58,6 +56,10 @@ body {
     background-color: #575757;
 }
 
+#sidebar ul li:hover {
+    background-color: #575757;
+}
+
 .bottom-links {
     margin-top: auto;
     list-style: none;
@@ -69,46 +71,104 @@ body {
     padding: 10px 15px;
 }
 
-.search-container {
-    position: fixed;
+.flash-messages-container {
     width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-    z-index: 2;
-    margin-left: 200px;
+    text-align: center;
+    padding: 20px;
+}
+
+.flashes {
+    display: inline-block;
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.alert {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .search-container input[type="text"] {
     padding: 10px;
-    margin-right: 5px;
-    font-size: 17px;
-    border: none;
+    background-color: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+#song-search {
+    padding: 8px 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+#song-search:focus {
     outline: none;
-    background-color: #333333;
-    color: #ffffff;
+    border-color: #6fb2d8;
 }
 
-#search-results th, #search-results td {
-    padding: 15px;
+button.search-button {
+    padding: 8px 15px;
+    background-color: #7a7979;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.search-button:hover {
+    background-color: #6fb2d8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    margin-top: 20px;
+}
+
+th, td {
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
 }
 
-#search-results th {
+th {
+    background-color: #1F1F1F;
+    color: #FFF;
+}
+
+td {
+    color: #AAA;
+}
+
+tbody tr:hover {
     background-color: #333333;
-    color: #ffffff;
 }
 
-#search-results tr:hover {
-    background-color: #454545;
+@media screen and (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
-
 
 .main-content {
     margin-left: 200px;
-    padding: 60px 10px;
+    padding: 40px;
 }
 
 @media screen and (max-height: 450px) {

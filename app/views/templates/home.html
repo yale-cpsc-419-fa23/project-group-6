@@ -17,9 +17,9 @@
 </head>
 <body>
 
-    <div id="sidebar" class="nav">
+    <nav id="sidebar">
         <a href="#home" class="logo">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Your Logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
         </a>
         <ul>
             <li><a href="{{ url_for('main.home') }}">Home</a></li>
@@ -33,27 +33,31 @@
             <li><a href="{{ url_for('settings.user_settings') }}" class="btn btn-primary" id="btn-settings">Settings</a></li>
             <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary" id="btn-logout">Logout</a></li>
         </ul>
+    </nav>
+
+    <div class="flash-messages-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
     </div>
 
     <div class="background-logo">
-        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Music App Logo" style="width: 300px; height: auto;">
     </div>
-    
-    <div class="main-content">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul class="flashes" style="margin-left: 20px;">
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
 
+    <div class="main-content">
         <div class="search-container">
-            <input type="text" id="song-search" placeholder="Search...">
-            <button id="search-button">Search</button>
+            <input type="text" id="song-search" placeholder="Search..." list="search-suggestions">
+            <datalist id="search-suggestions"></datalist>
+            <button type="submit" class="search-button" id="search-button">Search</button>
         </div>
+
         <table id="search-results">
             <thead>
                 <tr>
@@ -71,6 +75,7 @@
         </table>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>

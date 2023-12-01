@@ -29,7 +29,6 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 ### 4. Beta Version (Due: Dec 1)
 - Fully functional music recommendation engine, equipped to produce daily mixes.
 - Introduction of the Like and Dislike system.
-- Top played list integration for daily, weekly, monthly statistics.
 - Introduction of the Connect & Collaborate features.
 
 
@@ -38,6 +37,7 @@ Our Music Recommendation App aims to create a dynamic platform where users can u
 - Enhancement of the front-end for smoother user experiences and more intuitive interfaces.
 - Strengthening of the back-end with advanced analytics, database integrity checks, and reliability measures.
 - Conducting extensive tests to ensure stability during novel user interactions.
+- Top played list integration for daily, weekly, monthly statistics.
 
 
 #### MISCELLANEOUS

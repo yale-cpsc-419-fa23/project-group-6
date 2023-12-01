@@ -56,15 +56,42 @@ $(document).ready(function() {
 
     function performSearch(query, incrementPopularity) {
         $.get("/search", { song_name: query, increment_popularity: incrementPopularity }, function(data) {
-            resultsDiv.empty();
+            displaySearchResults(data, incrementPopularity);
+        });
+    }
 
+    function displaySearchResults(data, incrementPopularity) {
+        if (data && data.length > 0) {
+            if (incrementPopularity) {
+                resultsDiv.empty();
+                data.forEach(song => {
+                    resultsDiv.append(`
+                        <tr>
+                            <td>${song.name}</td>
+                            <td>${song.upload_date}</td>
+                            <td>${song.upload_user}</td>
+                            <td>${song.popularity}</td>
+                            <td>${song.filepath}</td>
+                        </tr>
+                    `);
+                });
+            } else {
+                $('#search-suggestions').empty();
+                data.forEach(function(song) {
+                    $('<option>').val(song.name).appendTo('#search-suggestions');
+                });
+            }
+        } else {
+            resultsDiv.empty();
+            resultsDiv.append("<p>No results found</p>");
+        }
             if (data && data.length > 0) {
                 if (incrementPopularity) {
                     data.forEach(song => {
-                        let likeButtonHtml = song.liked ? 
+                        let likeButtonHtml = song.liked ?
                             `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
                             `<button class="like-button" data-song-id="${song.id}">Like</button>`;
-                        
+
                             resultsDiv.append(`
                             <tr>
                                 <td>${song.name}</td>
