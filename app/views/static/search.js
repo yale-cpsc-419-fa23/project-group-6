@@ -1,6 +1,7 @@
 $(document).ready(function() {
     const searchInput = $("#song-search");
     const resultsDiv = $("#search-results tbody");
+    const searchButton = $("#search-button");
 
     searchInput.on("keyup", function(e) {
         const query = $(this).val();
@@ -17,6 +18,11 @@ $(document).ready(function() {
         }
     });
 
+    searchButton.on("click", function() {
+        const query = searchInput.val();
+        performSearch(query, true);
+    });
+
     resultsDiv.on('click', 'p', function() {
         const chosenSong = $(this).text();
         searchInput.val(chosenSong);
@@ -25,31 +31,34 @@ $(document).ready(function() {
 
     function performSearch(query, incrementPopularity) {
         $.get("/search", { song_name: query, increment_popularity: incrementPopularity }, function(data) {
-            resultsDiv.empty();
-
-            if (data && data.length > 0) {
-                if (incrementPopularity) {
-                    // Display results in table format
-                    data.forEach(song => {
-                        resultsDiv.append(`
-                            <tr>
-                                <td>${song.name}</td>
-                                <td>${song.upload_date}</td>
-                                <td>${song.upload_user}</td>
-                                <td>${song.popularity}</td>
-                                <td>${song.filepath}</td>
-                            </tr>
-                        `);
-                    });
-                } else {
-                    // Display top 10 results as clickable items 
-                    data.forEach(song => {
-                        resultsDiv.append(`<p>${song.name}</p>`);
-                    });
-                }
-            } else {
-                resultsDiv.append("<p>No results found</p>");
-            }
+            displaySearchResults(data, incrementPopularity);
         });
+    }
+
+    function displaySearchResults(data, incrementPopularity) {
+        if (data && data.length > 0) {
+            if (incrementPopularity) {
+                resultsDiv.empty();
+                data.forEach(song => {
+                    resultsDiv.append(`
+                        <tr>
+                            <td>${song.name}</td>
+                            <td>${song.upload_date}</td>
+                            <td>${song.upload_user}</td>
+                            <td>${song.popularity}</td>
+                            <td>${song.filepath}</td>
+                        </tr>
+                    `);
+                });
+            } else {
+                $('#search-suggestions').empty();
+                data.forEach(function(song) {
+                    $('<option>').val(song.name).appendTo('#search-suggestions');
+                });
+            }
+        } else {
+            resultsDiv.empty();
+            resultsDiv.append("<p>No results found</p>");
+        }
     }
 });
