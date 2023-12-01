@@ -47,7 +47,7 @@ $(document).ready(function() {
                     topSongsByGenreTable.append(`
                         <tr>
                             <td>${song.name}</td>
-                            <td>${song.upload_user}</td>
+                            <td>${song.creators}</td>
                             <td>${song.popularity}</td>
                         </tr>
                     `);

@@ -42,12 +42,7 @@
                         {% for song in recommended_songs %}
                         <tr>
                             <td>{{ song.get_name() }}</td>
-                            <td>
-                                {% for creator in song.get_creators() %}
-                                    {{ creator.get_username() }}
-                                    {% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            </td>
+                            <td>{{ song.creators }}</td>
                             <td>{{ song.get_popularity() }}</td>
                         </tr>
                         {% endfor %}
@@ -64,7 +59,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Uploaded By</th>
+                        <th>Artist</th>
                         <th>Popularity</th>
                     </tr>
                 </thead>
@@ -72,12 +67,7 @@
                     {% for song in top_songs %}
                     <tr>
                         <td>{{ song.get_name() }}</td>
-                        <td>
-                            {% for creator in song.get_creators() %}
-                                {{creator.get_username()}}
-                                {% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
+                        <td>{{ song.creators }} </td>
                         <td>{{ song.get_popularity() }}</td>
                     </tr>
                     {% endfor %}
@@ -98,7 +88,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Uploaded By</th>
+                        <th>Artist</th>
                         <th>Popularity</th>
                     </tr>
                 </thead>
