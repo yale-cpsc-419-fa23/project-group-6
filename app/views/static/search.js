@@ -65,6 +65,9 @@ $(document).ready(function() {
             if (incrementPopularity) {
                 resultsDiv.empty();
                 data.forEach(song => {
+                    let likeButtonHtml = song.liked ?
+                            `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
+                            `<button class="like-button" data-song-id="${song.id}">Like</button>`;
                     resultsDiv.append(`
                         <tr>
                             <td>${song.name}</td>
@@ -72,6 +75,7 @@ $(document).ready(function() {
                             <td>${song.upload_user}</td>
                             <td>${song.popularity}</td>
                             <td>${song.filepath}</td>
+                            <td>${likeButtonHtml}</td>
                         </tr>
                     `);
                 });
@@ -85,32 +89,5 @@ $(document).ready(function() {
             resultsDiv.empty();
             resultsDiv.append("<p>No results found</p>");
         }
-            if (data && data.length > 0) {
-                if (incrementPopularity) {
-                    data.forEach(song => {
-                        let likeButtonHtml = song.liked ?
-                            `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
-                            `<button class="like-button" data-song-id="${song.id}">Like</button>`;
-
-                            resultsDiv.append(`
-                            <tr>
-                                <td>${song.name}</td>
-                                <td>${song.upload_date}</td>
-                                <td>${song.upload_user}</td>
-                                <td>${song.popularity}</td>
-                                <td>${song.filepath}</td>
-                                <td>${likeButtonHtml}</td>
-                            </tr>
-                        `);
-                    });
-                } else {
-                    data.forEach(song => {
-                        resultsDiv.append(`<p>${song.name}</p>`);
-                    });
-                }
-            } else {
-                resultsDiv.append("<p>No results found</p>");
-            }
-        });
     }
 });
