@@ -5,15 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='homeStyles.css') }}">
-
-    <style>
-        #search-results th {
-            padding-left: 80px;
-            padding-right: 80px;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
 
@@ -22,16 +15,16 @@
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
         </a>
         <ul>
-            <li><a href="{{ url_for('main.home') }}">Home</a></li>
-            <li><a href="{{ url_for('main.explore') }}" class="btn btn-primary">Explore</a></li>
-            <li><a href="{{ url_for('music.liked_songs') }}" class="btn btn-primary">Liked Songs</a></li>
-            <li><a href="{{ url_for('music.uploaded_songs') }}" class="btn btn-primary">Uploaded Songs</a></li>
-            <li><a href="{{ url_for('music.upload_song') }}" class="btn btn-primary">Upload New Song</a></li>
+            <li><a href="{{ url_for('main.home') }}" class="btn nav">Home</a></li>
+            <li><a href="{{ url_for('main.explore') }}" class="btn nav">Explore</a></li>
+            <li><a href="{{ url_for('music.liked_songs') }}" class="btn nav">Liked Songs</a></li>
+            <li><a href="{{ url_for('music.uploaded_songs') }}" class="btn nav">Uploaded Songs</a></li>
+            <li><a href="{{ url_for('music.upload_song') }}" class="btn nav">Upload New Song</a></li>
         </ul>
 
         <ul class="bottom-links" id="sidebar-bottom-links">
-            <li><a href="{{ url_for('settings.user_settings') }}" class="btn btn-primary" id="btn-settings">Settings</a></li>
-            <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary" id="btn-logout">Logout</a></li>
+            <li><a href="{{ url_for('settings.user_settings') }}" class="btn nav" id="btn-settings">Settings</a></li>
+            <li><a href="{{ url_for('auth.logout') }}" class="btn nav" id="btn-logout">Logout</a></li>
         </ul>
     </nav>
 
