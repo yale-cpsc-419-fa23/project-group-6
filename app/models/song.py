@@ -75,7 +75,12 @@ class Song(db.Model):
     
     @classmethod
     def get_top_songs(cls, limit=20):
-        return cls.query.order_by(cls.Popularity.desc()).limit(limit).all()
+        top_songs = cls.query.order_by(cls.Popularity.desc()).limit(limit).all()
+    
+        for song in top_songs:
+            song.creators = ", ".join([creator.get_username() for creator in song.get_creators()])
+        
+        return top_songs
 
     @classmethod
     def get_all_songs(cls, n=None):

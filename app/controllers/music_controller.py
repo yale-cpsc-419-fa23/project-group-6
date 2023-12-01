@@ -29,7 +29,7 @@ def search():
             "name": song.get_name(),
             "filepath": song.get_file_path(),
             "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-            "upload_user": song.get_creators()[0].get_username(),
+            "creators": ", ".join([creator.get_username() for creator in song.get_creators()]),
             "popularity": song.get_popularity(),
             "liked": song.is_liked_by_user(session.get("user_id")),
          } for song in songs]
@@ -142,7 +142,7 @@ def top_songs_by_genre():
         songs_json = [
             {
                 "name": song.get_name(),
-                "upload_user": song.get_creators()[0].get_username(),
+                "creators": ", ".join([creator.get_username() for creator in song.get_creators()]),
                 "popularity": song.get_popularity()
             } for song in top_songs
         ]
