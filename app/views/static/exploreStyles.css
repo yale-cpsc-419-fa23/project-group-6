@@ -130,10 +130,14 @@ body, h1, h2, h3{
 }
 
 .btn-secondary.btn-block {
-    left: 0;
-    bottom: 0;
+    position: fixed;
+    left: 31%;
+    transform: translateX(-50%);
+    bottom: 10px; 
     color: #c0c3d4;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 5px 10px;
+    width: auto; 
     font-size: 18px;
+    border-radius: 5px;
 }
+
