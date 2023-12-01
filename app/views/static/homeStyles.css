@@ -1,74 +1,74 @@
-body, h1, h2, h3, ul, li {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3{
     color: #ffffff;
     background-color: #121212;
     font-family: Arial, sans-serif;
 }
 
-.dynamic-search-results a {
-    text-decoration: underline;
-    color: #ffffff;
-}
-
 #sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    width: 230px;
+    width: 250px;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #232323;
-    overflow-x: hidden;
-    padding-top: 20px;
-    z-index: 1;
+    height: 100%;
+    background: #333;
+    color: #fff;
+    z-index: 1000;
 }
 
 #sidebar .logo {
+    padding: 20px;
+    background: #222;
     display: block;
     text-align: center;
-    margin-bottom: 10px;
 }
 
 #sidebar .logo img {
-    display: block;
-    width: 150px;
+    max-width: 100%;
     height: auto;
-    margin: 0 auto 20px;
-}
+    display: block;
+    margin: 0 auto; }
 
 #sidebar ul {
-    list-style-type: none;
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+}
+
+#sidebar ul li {
+    padding: 0px 15px;
 }
 
 #sidebar ul li a {
-    padding: 6px 8px 6px 16px;
+    color: #ddd;
     text-decoration: none;
-    font-size: 25px;
-    color: #bbbbbb;
+    align-items: center;
     display: block;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 20px;
+    transition: background-color 0.3s; }
+
+#sidebar ul li a:hover,
+#sidebar ul li a.active {
+    background: #555;
+    color: #fff; }
+
+#sidebar .bottom-links {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-#sidebar ul li a:hover, .search-container button:hover {
+
+.dynamic-search-results a {
+    text-decoration: underline;
     color: #ffffff;
-    background-color: #575757;
-}
-
-#sidebar ul li:hover {
-    background-color: #575757;
-}
-
-.bottom-links {
-    margin-top: auto;
-    list-style: none;
-    padding-bottom: 40px;
-}
-
-#sidebar-bottom-links .btn {
-    font-size: 1.4em;
-    padding: 10px 15px;
 }
 
 .flash-messages-container {
@@ -167,7 +167,7 @@ tbody tr:hover {
 }
 
 .main-content {
-    margin-left: 200px;
+    margin-left: 250px;
     padding: 40px;
 }
 

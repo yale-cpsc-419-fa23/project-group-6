@@ -1,3 +1,8 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -59,27 +64,17 @@
     width: 100%;
 }
 
+.main-content {
+    margin-left: 250px;
+    padding: 40px;
+}
 .login {
     background:  #0a0a0a;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    position: relative; 
 }
-.background-logo {
-    position: absolute;
-    top: 50%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-    opacity: 0.2;
-    z-index: -1;
-}
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -97,24 +92,6 @@
     border: none;
     padding: 10px 20px;
 }
-.flashes {
-    list-style-type: none;
-    padding: 0;
+.btn-secondary {
+    margin-top: 10px;
 }
-.flashes li {
-    margin-bottom: 10px;
-}
-.flash-messages-container {
-    width: 100%; 
-    text-align: center; 
-    margin-top: 20px; }
-.flashes .alert {
-    display: inline-block;
-    pointer-events: auto; 
-}
-.form-row-flex {
-    display: flex;
-    justify-content: space-between;
-}
-.form-row-flex > div {
-    flex: 1; }

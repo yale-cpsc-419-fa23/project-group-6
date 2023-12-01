@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>My Songs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='mySongsStyles.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <nav id="sidebar">
+        <a href="#home" class="logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="{{ url_for('main.home') }}" class="btn nav">Home</a></li>
+            <li><a href="{{ url_for('main.explore') }}" class="btn nav">Explore</a></li>
+            <li><a href="{{ url_for('music.liked_songs') }}" class="btn nav">Liked Songs</a></li>
+            <li><a href="{{ url_for('music.uploaded_songs') }}" class="btn nav">Uploaded Songs</a></li>
+            <li><a href="{{ url_for('music.upload_song') }}" class="btn nav">Upload New Song</a></li>
+        </ul>
 
+        <ul class="bottom-links" id="sidebar-bottom-links">
+            <li><a href="{{ url_for('settings.user_settings') }}" class="btn nav" id="btn-settings">Settings</a></li>
+            <li><a href="{{ url_for('auth.logout') }}" class="btn nav" id="btn-logout">Logout</a></li>
+        </ul>
+    </nav>
     <div class="background-logo">
         <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
     </div>
