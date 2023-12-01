@@ -79,6 +79,7 @@ $(document).ready(function() {
                         </tr>
                     `);
                 });
+                $('#search-suggestions').empty();
             } else {
                 $('#search-suggestions').empty();
                 data.forEach(function(song) {
