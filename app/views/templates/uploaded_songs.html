@@ -25,6 +25,19 @@
             <li><a href="{{ url_for('auth.logout') }}" class="btn nav" id="btn-logout">Logout</a></li>
         </ul>
     </nav>
+
+    <div class="flash-messages-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <div class="background-logo">
         <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
     </div>
@@ -35,25 +48,40 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Upload Date</th>
+                    <th>Artist</th>
                     <th>Popularity</th>
+                    <th>Upload Date</th>
                     <th>Filepath</th>
-                    <th>Actions</th>
+                    <th>Rename Song</th>
+                    <th>Add Artists</th>
                 </tr>
             </thead>
             <tbody>
                 {% for song in songs %}
                 <tr>
                     <td>{{ song.get_name() }}</td>
-                    <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
+                    <td>{{ song.creators }}</td>
                     <td>{{ song.get_popularity() }}</td>
+                    <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
                     <td>{{ song.get_file_path() }}</td>
+
+                    <!-- Rename column -->
                     <td>
                         <button class="btn-rename" onclick="showRenameField(this)">Rename</button>
                         <form method="post" action="{{ url_for('music.rename_song', song_id=song.SongId) }}" class="rename-form">
                             <input type="text" name="new_name" class="rename-input" value="{{ song.name }}" required>
                             <input type="submit" value="Save" class="btn-save">
                             <button type="button" class="btn-cancel" onclick="cancelRename(this)">Cancel</button>
+                        </form>
+                    </td>
+
+                    <!-- Add Artists column -->
+                    <td>
+                        <button class="btn-add-artists" onclick="showAddArtistsForm(this)">Add Artists</button>
+                        <form method="post" action="{{ url_for('music.add_artists', song_id=song.SongId) }}" class="add-artists-form">
+                            <input type="text" name="artist_ids" class="add-artists-input" placeholder="Enter artist IDs, separated by commas" required>
+                            <input type="submit" value="Add" class="btn-save">
+                            <button type="button" class="btn-cancel" onclick="cancelAddArtists(this)">Cancel</button>
                         </form>
                     </td>
                 </tr>
@@ -76,9 +104,21 @@
             form.find('.rename-input, .btn-save, .btn-cancel').hide();
             form.prev('.btn-rename').show();
         }
+        
+        function showAddArtistsForm(button) {
+            var form = $(button).next('.add-artists-form');
+            form.find('.add-artists-input, .btn-save, .btn-cancel').show();
+            $(button).hide();
+        }
+
+        function cancelAddArtists(button) {
+            var form = $(button).closest('.add-artists-form');
+            form.find('.add-artists-input, .btn-save, .btn-cancel').hide();
+            form.prev('.btn-add-artists').show();
+        }
 
         $(document).ready(function() {
-            $('.rename-input, .btn-save, .btn-cancel').hide();
+            $('.rename-input, .btn-save, .btn-cancel, .add-artists-input').hide();
         });
     </script>
 </body>

@@ -42,16 +42,16 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Upload Date</th>
+                    <th>Artist</th>
                     <th>Popularity</th>
                     <th>Liked Time</th>
                 </tr>
             </thead>
             <tbody>
-                {% for song, liked_date in songs %}
+                {% for song, liked_date, creators in songs %}
                 <tr>
                     <td>{{ song.get_name() }}</td>
-                    <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
+                    <td>{{ creators }}</td>
                     <td>{{ song.get_popularity() }}</td>
                     <td>{{ liked_date.strftime('%Y-%m-%d') if liked_date else 'N/A' }}</td>
                 </tr>

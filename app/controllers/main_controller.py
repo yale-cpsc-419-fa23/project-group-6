@@ -21,8 +21,9 @@ def explore():
     top_songs = Song.get_top_songs()
     recommendation_info, recommended_songs = recommend_songs(session['user_id'], n_likes=5, n_recommendations=5)
 
-    for recommended_song in recommended_songs:
-        recommended_song.creators = ", ".join([creator.get_username() for creator in recommended_song.get_creators()])
+    if recommended_songs is not None:
+        for recommended_song in recommended_songs:
+            recommended_song.creators = ", ".join([creator.get_username() for creator in recommended_song.get_creators() if creator is not None])
 
     return render_template('explore.html',
                            top_songs=top_songs,

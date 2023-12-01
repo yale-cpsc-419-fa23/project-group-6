@@ -29,7 +29,7 @@ def search():
             "name": song.get_name(),
             "filepath": song.get_file_path(),
             "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-            "creators": ", ".join([creator.get_username() for creator in song.get_creators()]),
+            "creators": ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None]),
             "popularity": song.get_popularity(),
             "liked": song.is_liked_by_user(session.get("user_id")),
          } for song in songs]
@@ -45,7 +45,13 @@ def liked_songs():
 
     user_id = session['user_id']
     liked_songs_records = UserSongLike.query.filter_by(UserId=user_id).all()
-    liked_songs = [(record.song, record.LikedDate) for record in liked_songs_records]
+
+    liked_songs = []
+    for record in liked_songs_records:
+        song = record.song
+        liked_date = record.LikedDate
+        creators = ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None])
+        liked_songs.append((song, liked_date, creators))
 
     return render_template('liked_songs.html', songs=liked_songs)
 
@@ -60,6 +66,9 @@ def uploaded_songs():
     user = User.find_by_id(user_id)
     songs = user.get_created_songs()
 
+    for song in songs:
+        song.creators = ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None])
+
     return render_template('uploaded_songs.html', songs=songs)
 
 
@@ -73,12 +82,11 @@ def save_song():
     def allowed_file(filename):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-    # Check if the post request has the file part
     if 'file' not in request.files:
         flash('No file part', 'danger')
         return redirect(request.url)
     file = request.files['file']
-    # If user does not select file, browser might submit an empty part without filename
+
     if file.filename == '':
         flash('No selected file', 'danger')
         return redirect(request.url)
@@ -87,9 +95,7 @@ def save_song():
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
 
-        # Extract features from song
         features = audio_feature_extractor(file_path)
-        # features = {}
         song_details = {
             "Name": request.form['name'],
             "Filepath": file_path
@@ -97,8 +103,7 @@ def save_song():
         song_data = {**song_details, **features}
 
         with current_app.app_context():
-            # Add the song to the database
-            song = Song.create(session.get("user_id"), **song_data) #TODO: Add user_id to the function call
+            song = Song.create(session.get("user_id"), **song_data)
 
         flash('File successfully uploaded', 'success')
         return redirect(url_for('main.home'))
@@ -125,6 +130,31 @@ def rename_song(song_id):
     return redirect(url_for('music.uploaded_songs'))
 
 
+@music.route('/add-artists/<int:song_id>', methods=['POST'])
+def add_artists(song_id):
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    song_to_update = Song.query.get(song_id)
+    artist_ids = request.form['artist_ids'].split(',')
+
+    if song_to_update:
+        try:
+            artist_id_list = [int(id.strip()) for id in artist_ids]
+            valid_ids, invalid_ids = song_to_update.add_creators(artist_id_list)
+            if valid_ids:
+                flash(f'Artists {", ".join(map(str, valid_ids))} added successfully.', 'success')
+            if invalid_ids:
+                flash(f'Artists with IDs: {", ".join(map(str, invalid_ids))} are not valid and were not added.', 'error')
+        except ValueError:
+            flash('Invalid artist IDs provided.', 'error')
+    else:
+        flash('Song not found.')
+
+    return redirect(url_for('music.uploaded_songs'))
+
+
 @music.route('/search-genre', methods=['GET'])
 def search_genre():
     genre_name = request.args.get('genre_name')
@@ -142,7 +172,7 @@ def top_songs_by_genre():
         songs_json = [
             {
                 "name": song.get_name(),
-                "creators": ", ".join([creator.get_username() for creator in song.get_creators()]),
+                "creators": ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None]),
                 "popularity": song.get_popularity()
             } for song in top_songs
         ]

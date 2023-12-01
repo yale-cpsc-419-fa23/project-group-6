@@ -25,6 +25,7 @@
             <li><a href="{{ url_for('auth.logout') }}" class="btn nav" id="btn-logout">Logout</a></li>
         </ul>
     </nav>
+
     <div class="main-content">
         <div class="form-container">
             <div class="card">
@@ -47,6 +48,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

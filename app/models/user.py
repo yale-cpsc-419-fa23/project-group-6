@@ -73,6 +73,9 @@ class User(db.Model):
 
         return registered_date_time
 
+    def get_id(self):
+        return self.UserId
+    
     def get_username(self):
         return self.Username
 

@@ -1,9 +1,10 @@
-import random
+from flask import flash
 from datetime import datetime
 from sqlalchemy.sql.expression import func
+
 from app import db
 from app.models.user_song_create import UserSongCreate
-from app.models.genre import Genre
+from app.models.user import User
 
 class Song(db.Model):
     SongId = db.Column(db.Integer, primary_key=True)
@@ -121,16 +122,27 @@ class Song(db.Model):
         return self.SongId
 
     def add_creators(self, user_ids):
+        valid_ids = []
+        invalid_ids = []
+
         for user_id in user_ids:
+            artist = User.query.get(user_id)
+            if artist is None:
+                invalid_ids.append(user_id)
+                continue
+
             existing_record = UserSongCreate.query.filter_by(UserId=user_id, SongId=self.SongId).first()
             if not existing_record:
                 user_song = UserSongCreate(UserId=user_id, SongId=self.SongId,
-                                           UploadDate=datetime.now(), EditDate=datetime.now())
+                                        UploadDate=datetime.now(), EditDate=datetime.now())
                 db.session.add(user_song)
             else:
                 existing_record.EditDate = datetime.now()
-        db.session.commit()
+            valid_ids.append(user_id)
 
+        db.session.commit()
+        return valid_ids, invalid_ids
+    
     def add_genres(self, genres):
         for genre in genres:
             if genre not in self.genres:

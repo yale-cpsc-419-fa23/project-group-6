@@ -71,8 +71,8 @@ $(document).ready(function() {
                     resultsDiv.append(`
                         <tr>
                             <td>${song.name}</td>
-                            <td>${song.upload_date}</td>
                             <td>${song.creators}</td>
+                            <td>${song.upload_date}</td>
                             <td>${song.popularity}</td>
                             <td>${song.filepath}</td>
                             <td>${likeButtonHtml}</td>
