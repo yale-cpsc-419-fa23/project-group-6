@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mySongsStyles.css') }}">
+    <title>Liked Songs</title>
+</head>
+<body>
+
+    <div class="background-logo">
+        <img src="{{ url_for('static', filename='img/register_logo.jpg') }}" alt="Your Music App Logo" style="width: 300px; height: auto;">
+    </div>
+
+    <div class="main-content">
+        <h1>My Liked Songs</h1>
+        <table id="liked-songs-results">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Upload Date</th>
+                    <th>Popularity</th>
+                    <th>Liked Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song, liked_date in songs %}
+                <tr>
+                    <td>{{ song.get_name() }}</td>
+                    <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
+                    <td>{{ song.get_popularity() }}</td>
+                    <td>{{ liked_date.strftime('%Y-%m-%d') if liked_date else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('main.home') }}" class="btn btn-secondary btn-block">Go Back</a>
+
+</body>
+</html>

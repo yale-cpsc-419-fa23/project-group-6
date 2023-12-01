@@ -24,9 +24,10 @@ class Song(db.Model):
     Popularity = db.Column(db.Integer)
     Filepath = db.Column(db.Text)
     Cluster = db.Column(db.Integer)
+
     genres = db.relationship('Genre', secondary='song_genre', back_populates='songs')
     create_records = db.relationship('UserSongCreate', backref='song')
-    like_records = db.relationship('UserSongLike', backref='song')
+    like_records = db.relationship('UserSongLike', back_populates='song')
 
     def __repr__(self):
         return f"<Song {self.SongId}>"
@@ -134,3 +135,6 @@ class Song(db.Model):
     def set_cluster(self, cluster):
         self.Cluster = cluster
         db.session.commit()
+
+    def is_liked_by_user(self, user_id):
+        return any(like.UserId == user_id for like in self.like_records)

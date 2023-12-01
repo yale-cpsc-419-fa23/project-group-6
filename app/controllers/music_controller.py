@@ -6,6 +6,7 @@ from app.models.song import Song
 from app.models.user import User
 from app.models.genre import Genre
 from app.models.user_song_create import UserSongCreate
+from app.models.user_song_like import UserSongLike
 from app.utils.audio_feature_utils import audio_feature_extractor
 
 ALLOWED_EXTENSIONS = {'mp3', 'wav', 'flac'}
@@ -23,14 +24,43 @@ def search():
 
     songs = Song.search_by_name(song_name, increment_popularity, limit=10 if not increment_popularity else 100)
     songs_json = [
-        {"name": song.get_name(),
-         "filepath": song.get_file_path(),
-         "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-         "upload_user": song.get_creators()[0].get_username(),
-         "popularity": song.get_popularity(),
+        {
+            "id": song.get_id(),
+            "name": song.get_name(),
+            "filepath": song.get_file_path(),
+            "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
+            "upload_user": song.get_creators()[0].get_username(),
+            "popularity": song.get_popularity(),
+            "liked": song.is_liked_by_user(session.get("user_id")),
          } for song in songs]
 
     return jsonify(songs_json)
+
+
+@music.route('/liked_songs')
+def liked_songs():
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    user_id = session['user_id']
+    liked_songs_records = UserSongLike.query.filter_by(UserId=user_id).all()
+    liked_songs = [(record.song, record.LikedDate) for record in liked_songs_records]
+
+    return render_template('liked_songs.html', songs=liked_songs)
+
+
+@music.route('/uploaded_songs')
+def uploaded_songs():
+    if 'user_id' not in session:
+        flash('You need to login first.')
+        return redirect(url_for('auth.login'))
+
+    user_id = session['user_id']
+    user = User.find_by_id(user_id)
+    songs = user.get_created_songs()
+
+    return render_template('uploaded_songs.html', songs=songs)
 
 
 @music.route('/upload_song', methods=['GET'])
@@ -75,20 +105,7 @@ def save_song():
     else:
         flash('Allowed file types are mp3, wav, and flac', 'danger')
         return redirect(request.url)
-
-
-@music.route('/my-songs')
-def my_songs():
-    if 'user_id' not in session:
-        flash('You need to login first.')
-        return redirect(url_for('auth.login'))
-
-    user_id = session['user_id']
-    user = User.find_by_id(user_id)
-    songs = user.get_created_songs()
-
-    return render_template('my_songs.html', songs=songs)
-
+    
 
 @music.route('/rename-song/<int:song_id>', methods=['POST'])
 def rename_song(song_id):
@@ -132,3 +149,25 @@ def top_songs_by_genre():
         return jsonify(songs_json)
     else:
         return jsonify([])
+    
+
+@music.route('/like_song', methods=['POST'])
+def like_song():
+    song_id = request.json.get('song_id')
+    user_id = session.get("user_id")
+
+    if UserSongLike.like_song(user_id, song_id):
+        return jsonify({"status": "success"}), 200
+    else:
+        return jsonify({"status": "error", "message": "Already liked"}), 400
+
+
+@music.route('/unlike_song', methods=['POST'])
+def unlike_song():
+    song_id = request.json.get('song_id')
+    user_id = session.get("user_id")
+
+    if UserSongLike.unlike_song(user_id, song_id):
+        return jsonify({"status": "success"}), 200
+    else:
+        return jsonify({"status": "error", "message": "Not liked"}), 400

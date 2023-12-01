@@ -1,6 +1,7 @@
 $(document).ready(function() {
     const searchInput = $("#song-search");
     const resultsDiv = $("#search-results tbody");
+    const searchButton = $("#search-button");
 
     searchInput.on("keyup", function(e) {
         const query = $(this).val();
@@ -17,10 +18,40 @@ $(document).ready(function() {
         }
     });
 
+    searchButton.on("click", function() {
+        const query = searchInput.val();
+        performSearch(query, true);
+    });
+
     resultsDiv.on('click', 'p', function() {
         const chosenSong = $(this).text();
         searchInput.val(chosenSong);
         performSearch(chosenSong, true);
+    });
+
+    resultsDiv.on('click', '.like-button, .unlike-button', function() {
+        const button = $(this);
+        const songId = button.data('song-id');
+        const isLike = button.hasClass('like-button');
+
+        const endpoint = isLike ? '/like_song' : '/unlike_song';
+        $.ajax({
+            url: endpoint,
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ song_id: songId }),
+            success: function(response) {
+                // Toggle the button appearance and class based on like/unlike
+                if (isLike) {
+                    button.text('Unlike').removeClass('like-button').addClass('unlike-button');
+                } else {
+                    button.text('Like').removeClass('unlike-button').addClass('like-button');
+                }
+            },
+            error: function(error) {
+                console.error('Error updating like status:', error);
+            }
+        });
     });
 
     function performSearch(query, incrementPopularity) {
@@ -29,20 +60,23 @@ $(document).ready(function() {
 
             if (data && data.length > 0) {
                 if (incrementPopularity) {
-                    // Display results in table format
                     data.forEach(song => {
-                        resultsDiv.append(`
+                        let likeButtonHtml = song.liked ? 
+                            `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
+                            `<button class="like-button" data-song-id="${song.id}">Like</button>`;
+                        
+                            resultsDiv.append(`
                             <tr>
                                 <td>${song.name}</td>
                                 <td>${song.upload_date}</td>
                                 <td>${song.upload_user}</td>
                                 <td>${song.popularity}</td>
                                 <td>${song.filepath}</td>
+                                <td>${likeButtonHtml}</td>
                             </tr>
                         `);
                     });
                 } else {
-                    // Display top 10 results as clickable items 
                     data.forEach(song => {
                         resultsDiv.append(`<p>${song.name}</p>`);
                     });

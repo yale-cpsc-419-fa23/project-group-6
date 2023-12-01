@@ -8,6 +8,12 @@ body {
     background-color: #121212;
 }
 
+.recommendations-title{
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
 .top-songs-title {
     text-align: center;
     color: #ffffff;

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
-UPLOAD_FOLDER = 'app/uploads/'  # You might need to adjust this based on your app's structure.
+UPLOAD_FOLDER = 'app/uploads/'
 
 db = SQLAlchemy()
 def create_app(config_name):
