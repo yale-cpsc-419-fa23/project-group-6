@@ -88,6 +88,10 @@ body, h1, h2, h3{
 .flashes .alert {
     display: inline-block; 
     pointer-events: auto; 
+    background-color: #c3e8fd; 
+    color: #1d4157;
+    padding: 10px; 
+    border-radius: 5px; 
 }
 
 
