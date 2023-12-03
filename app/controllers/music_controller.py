@@ -185,8 +185,8 @@ def top_songs_by_genre():
 def like_song():
     song_id = request.json.get('song_id')
     user_id = session.get("user_id")
-
-    if UserSongLike.like_song(user_id, song_id):
+    user = User.find_by_id(user_id)
+    if user.like(song_id):
         return jsonify({"status": "success"}), 200
     else:
         return jsonify({"status": "error", "message": "Already liked"}), 400
@@ -196,8 +196,8 @@ def like_song():
 def unlike_song():
     song_id = request.json.get('song_id')
     user_id = session.get("user_id")
-
-    if UserSongLike.unlike_song(user_id, song_id):
+    user = User.find_by_id(user_id)
+    if user.unlike(song_id):
         return jsonify({"status": "success"}), 200
     else:
         return jsonify({"status": "error", "message": "Not liked"}), 400

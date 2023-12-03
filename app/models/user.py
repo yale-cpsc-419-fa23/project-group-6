@@ -16,6 +16,15 @@ class User(db.Model):
     RegisteredDateTime = db.Column(db.DateTime, nullable=False)
     create_records = db.relationship('UserSongCreate', backref='user')
     like_records = db.relationship('UserSongLike', order_by='UserSongLike.LikedDate.desc()', backref='user')
+    create_records = db.relationship(
+        'UserSongCreate',
+        backref='user'
+    )
+    like_records = db.relationship(
+        'UserSongLike',
+        order_by='UserSongLike.LikedDate.desc()',
+        back_populates='user'
+    )
 
     def __repr__(self):
         return f"<User {self.Username}>"
@@ -95,6 +104,8 @@ class User(db.Model):
         like_records = random.sample(self.like_records, min(n_likes, len(self.like_records)))
         return [record.get_song() for record in like_records]
 
+    def is_liked_song(self, song_id):
+        return any(like_record.SongId == song_id for like_record in self.like_records)
     # info update
     def update_username(self, new_username):
         self.Username = new_username
@@ -114,11 +125,22 @@ class User(db.Model):
 
     def add_liked(self, song_id):
         existing_like = UserSongLike.query.filter_by(UserId=self.UserId, SongId=song_id).first()
+    def like(self, song_id):
+        existing_like = any(like_record.SongId == song_id for like_record in self.like_records)
         if not existing_like:
             like_record = UserSongLike(UserId=self.UserId, SongId=song_id, LikedDate=datetime.now())
             self.like_records.append(like_record)
             db.session.commit()
+            return True
+        return False
 
+    def unlike(self, song_id):
+        like_record = next((like for like in self.like_records if like.SongId == song_id), None)
+        if like_record:
+            db.session.delete(like_record)
+            db.session.commit()
+            return True
+        return False
 
 
 
