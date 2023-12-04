@@ -45,7 +45,7 @@ $(document).ready(function() {
             if (songs && songs.length > 0) {
                 songs.forEach(song => {
                     let creatorsHtml = song.creators.map(creator =>
-                        `<a href="/profile/${creator.id}">${creator.username}</a>`
+                        `<a href="${creator.url}">${creator.username}</a>`
                     ).join(', ');
                     topSongsByGenreTable.append(`
                         <tr>

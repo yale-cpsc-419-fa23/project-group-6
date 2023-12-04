@@ -101,7 +101,7 @@ $(document).ready(function() {
                         `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
                         `<button class="like-button" data-song-id="${song.id}">Like</button>`;
                     let creatorsHtml = song.creators.map(creator =>
-                        `<a href="/profile/${creator.id}">${creator.username}</a>`
+                        `<a href="${creator.url}">${creator.username}</a>`
                     ).join(', ');
 
                     resultsDiv.append(`

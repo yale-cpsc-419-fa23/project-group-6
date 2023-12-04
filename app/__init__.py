@@ -27,4 +27,7 @@ def create_app(config_name):
     from app.controllers import settings_controller
     app.register_blueprint(settings_controller.settings)
 
+    from app.controllers import user_controller
+    app.register_blueprint(user_controller.user)
+
     return app
