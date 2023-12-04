@@ -71,28 +71,29 @@ body, h1, h2, h3{
     color: #ffffff;
 }
 
-.flash-messages-container {
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-}
-
 .flashes {
-    display: inline-block;
-    background-color: #333;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+    padding: 0;
+}
+.flashes li {
+    margin-bottom: 10px;
 }
 
-.alert {
-    color: white;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+.flash-messages-container {
+    width: 100%; 
+    text-align: center; 
+    margin-top: 20px;
 }
+
+.flashes .alert {
+    display: inline-block; 
+    pointer-events: auto; 
+    background-color: #c3e8fd; 
+    color: #1d4157;
+    padding: 10px; 
+    border-radius: 5px; 
+}
+
 
 .search-container input[type="text"] {
     padding: 10px;
