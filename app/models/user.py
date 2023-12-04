@@ -4,6 +4,7 @@ import random
 
 from app import db
 from app.models.user_song_like import UserSongLike
+from app.models.user_user_follow import UserUserFollow
 
 
 class User(db.Model):
@@ -14,8 +15,6 @@ class User(db.Model):
     Gender = db.Column(db.String(10), nullable=False)
     Birthday = db.Column(db.Date, nullable=False)
     RegisteredDateTime = db.Column(db.DateTime, nullable=False)
-    create_records = db.relationship('UserSongCreate', backref='user')
-    like_records = db.relationship('UserSongLike', order_by='UserSongLike.LikedDate.desc()', backref='user')
     create_records = db.relationship(
         'UserSongCreate',
         backref='user'
@@ -24,6 +23,18 @@ class User(db.Model):
         'UserSongLike',
         order_by='UserSongLike.LikedDate.desc()',
         back_populates='user'
+    )
+    followed = db.relationship(
+        'UserUserFollow',
+        foreign_keys=[UserUserFollow.UserId1],
+        backref=db.backref('follower', lazy='joined'),
+        lazy='dynamic'
+    )
+    followers = db.relationship(
+        'UserUserFollow',
+        foreign_keys=[UserUserFollow.UserId2],
+        backref=db.backref('followed', lazy='joined'),
+        lazy='dynamic'
     )
 
     def __repr__(self):
@@ -84,7 +95,7 @@ class User(db.Model):
 
     def get_id(self):
         return self.UserId
-    
+
     def get_username(self):
         return self.Username
 
@@ -106,6 +117,19 @@ class User(db.Model):
 
     def is_liked_song(self, song_id):
         return any(like_record.SongId == song_id for like_record in self.like_records)
+
+    def is_following(self, user_id):
+        return any(follow_record.UserId2 == user_id for follow_record in self.followed)
+
+    def is_followed_by(self, user_id):
+        return any(follow_record.UserId1 == user_id for follow_record in self.followers)
+
+    def get_followed(self):
+        return [record.get_followed() for record in self.followed]
+
+    def get_followers(self):
+        return [record.get_follower() for record in self.followers]
+
     # info update
     def update_username(self, new_username):
         self.Username = new_username
@@ -123,8 +147,6 @@ class User(db.Model):
         self.Birthday = new_birthday
         db.session.commit()
 
-    def add_liked(self, song_id):
-        existing_like = UserSongLike.query.filter_by(UserId=self.UserId, SongId=song_id).first()
     def like(self, song_id):
         existing_like = any(like_record.SongId == song_id for like_record in self.like_records)
         if not existing_like:
@@ -142,6 +164,19 @@ class User(db.Model):
             return True
         return False
 
+    def follow(self, user_id):
+        if not self.is_following(user_id):
+            follow = UserUserFollow(UserId1=self.UserId, UserId2=user_id)
+            db.session.add(follow)
+            db.session.commit()
+            return True
+        return False
 
-
-
+    def unfollow(self, user_id):
+        follow_record_to_delete = next(
+            (follow_record for follow_record in self.followed if follow_record.UserId2 == user_id), None)
+        if follow_record_to_delete:
+            db.session.delete(follow_record_to_delete)
+            db.session.commit()
+            return True
+        return False
