@@ -83,6 +83,7 @@ sqlite database for MVP Release)
 |   |   |-- user_song_create.py
 |   |   |-- user_song_like.py
 |   |   |-- user_user_follow.py
+|   |-- /uploads
 |   |-- /utils
 |   |   |-- __init__.py
 |   |   |-- audio_feature_utils.py
@@ -94,6 +95,7 @@ sqlite database for MVP Release)
 |   |   |-- forms.py
 |   |-- __init__.py
 |   |-- config.py
+|   |-- *database*.py
 |-- run.py
 |-- requirements.txt
 
