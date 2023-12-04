@@ -49,5 +49,5 @@ def register():
 def logout():
     if 'user_id' in session:
         session.pop('user_id')
-        flash('You have been logged out.', 'info') 
+        flash('You have been logged out.', 'info')
     return redirect(url_for('auth.login'))

@@ -34,7 +34,7 @@ def user_settings():
 
         if form.new_password.data:
             user.update_password(form.new_password.data)
-        
+
         flash('Your settings have been updated.', 'success')
         return redirect(url_for('settings.user_settings'))
     else:

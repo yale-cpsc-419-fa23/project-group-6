@@ -111,7 +111,7 @@ def save_song():
     else:
         flash('Allowed file types are mp3, wav, and flac', 'danger')
         return redirect(request.url)
-    
+
 
 @music.route('/rename-song/<int:song_id>', methods=['POST'])
 def rename_song(song_id):
@@ -147,7 +147,8 @@ def add_artists(song_id):
             if valid_ids:
                 flash(f'Artists {", ".join(map(str, valid_ids))} added successfully.', 'success')
             if invalid_ids:
-                flash(f'Artists with IDs: {", ".join(map(str, invalid_ids))} are not valid and were not added.', 'error')
+                flash(f'Artists with IDs: {", ".join(map(str, invalid_ids))} are not valid and were not added.',
+                      'error')
         except ValueError:
             flash('Invalid artist IDs provided.', 'error')
     else:
@@ -180,7 +181,7 @@ def top_songs_by_genre():
         return jsonify(songs_json)
     else:
         return jsonify([])
-    
+
 
 @music.route('/like_song', methods=['POST'])
 def like_song():

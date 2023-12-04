@@ -6,6 +6,7 @@ from app import db
 from app.models.user_song_create import UserSongCreate
 from app.models.user import User
 
+
 class Song(db.Model):
     SongId = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.Text)
@@ -73,14 +74,14 @@ class Song(db.Model):
         if not song_ids:
             return []
         return cls.query.filter(cls.SongId.in_(song_ids)).all()
-    
+
     @classmethod
     def get_top_songs(cls, limit=20):
         top_songs = cls.query.order_by(cls.Popularity.desc()).limit(limit).all()
-    
+
         for song in top_songs:
             song.creators = song.get_creators_profiles()
-        
+
         return top_songs
 
     @classmethod
@@ -88,7 +89,7 @@ class Song(db.Model):
         if n is None:
             return db.session.query(cls).all()
         return db.session.query(cls).order_by(func.random()).limit(n).all()
-    
+
     def rename(self, name):
         self.Name = name
 
@@ -143,7 +144,7 @@ class Song(db.Model):
             existing_record = UserSongCreate.query.filter_by(UserId=user_id, SongId=self.SongId).first()
             if not existing_record:
                 user_song = UserSongCreate(UserId=user_id, SongId=self.SongId,
-                                        UploadDate=datetime.now(), EditDate=datetime.now())
+                                           UploadDate=datetime.now(), EditDate=datetime.now())
                 db.session.add(user_song)
             else:
                 existing_record.EditDate = datetime.now()
@@ -151,7 +152,7 @@ class Song(db.Model):
 
         db.session.commit()
         return valid_ids, invalid_ids
-    
+
     def add_genres(self, genres):
         for genre in genres:
             if genre not in self.genres:

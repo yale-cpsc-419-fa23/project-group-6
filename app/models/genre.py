@@ -6,9 +6,9 @@ class Genre(db.Model):
     Name = db.Column(db.String)
     Description = db.Column(db.Text)
     songs = db.relationship(
-        'Song', 
-        secondary='song_genre', 
-        back_populates='genres', 
+        'Song',
+        secondary='song_genre',
+        back_populates='genres',
         order_by='Song.Popularity.desc()'
     )
 
@@ -23,7 +23,7 @@ class Genre(db.Model):
                 db.session.commit()
             genres.append(genre)
         return genres
-    
+
     @classmethod
     def get_all_genre(cls):
         return cls.query.all()
@@ -57,5 +57,3 @@ class Genre(db.Model):
 
     def get_songs(self):
         return self.songs
-
-

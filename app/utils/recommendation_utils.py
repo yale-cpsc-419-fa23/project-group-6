@@ -7,7 +7,6 @@ from app.models.song import Song
 from app import db
 from sqlalchemy.orm import Session
 
-
 feature_cols = ['Duration_ms', 'Explicit', 'Mode', 'Key', 'Tempo', 'Energy',
                 'Danceability', 'Loudness', 'Acousticness', 'Instrumentalness',
                 'Liveness', 'Speechiness', 'Valence']

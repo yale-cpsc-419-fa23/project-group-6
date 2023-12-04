@@ -2,6 +2,7 @@ from app import db
 
 from datetime import datetime
 
+
 class UserSongLike(db.Model):
     SongId = db.Column(db.Integer, db.ForeignKey('song.SongId'), primary_key=True)
     UserId = db.Column(db.Integer, db.ForeignKey('user.UserId'), primary_key=True)
@@ -18,7 +19,6 @@ class UserSongLike(db.Model):
 
     def get_creator(self):
         return self.user
-    
+
     def get_liked_date(self):
         return self.LikedDate
-    
