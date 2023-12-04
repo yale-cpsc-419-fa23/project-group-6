@@ -87,15 +87,30 @@ h1 {
     text-align: center;
 }
 
-#search-results th, #search-results td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    background-color: #333333;
-    color: #ffffff;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    margin-top: 20px;
 }
 
-#search-results tr:nth-child(even) {
-    background-color: #454545;
+th, td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    background-color: #1F1F1F;
+    color: #FFF;
+}
+
+td {
+    color: #AAA;
+}
+
+tbody tr:hover {
+    background-color: #333333;
 }
 
 .btn-rename, .btn-save, .btn-cancel, .btn-add-artists {
