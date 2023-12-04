@@ -120,18 +120,34 @@ body, h1, h2, h3{
     border-color: #6fb2d8;
 }
 
-button.follow {
+button.follow-button {
     padding: 8px 15px;
-    background-color: #7a7979;
+    background-color: #4A90E2;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-button.follow:hover {
-    background-color: #6fb2d8;
+button.follow-button:hover {
+    background-color: #357ABD;
+}
+
+button.unfollow-button {
+    padding: 8px 15px;
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button.unfollow-button:hover {
+    background-color: #E55050;
 }
 
 table {
