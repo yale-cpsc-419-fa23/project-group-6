@@ -28,11 +28,12 @@ def search():
             "id": song.get_id(),
             "name": song.get_name(),
             "filepath": song.get_file_path(),
-            "upload_date": song.get_upload_date().strftime('%Y-%m-%d', ),
-            "creators": ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None]),
+            "upload_date": song.get_upload_date().strftime('%Y-%m-%d'),
+            "creators": song.get_creators_profiles(),
             "popularity": song.get_popularity(),
             "liked": song.is_liked_by_user(session.get("user_id")),
-         } for song in songs]
+        } for song in songs
+    ]
 
     return jsonify(songs_json)
 
@@ -44,13 +45,14 @@ def liked_songs():
         return redirect(url_for('auth.login'))
 
     user_id = session['user_id']
-    liked_songs_records = UserSongLike.query.filter_by(UserId=user_id).all()
+    user = User.find_by_id(user_id)
+    liked_songs_records = user.like_records
 
     liked_songs = []
     for record in liked_songs_records:
         song = record.song
         liked_date = record.LikedDate
-        creators = ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None])
+        creators = song.get_creators_profiles()
         liked_songs.append((song, liked_date, creators))
 
     return render_template('liked_songs.html', songs=liked_songs)
@@ -67,8 +69,7 @@ def uploaded_songs():
     songs = user.get_created_songs()
 
     for song in songs:
-        song.creators = ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None])
-
+        song.creators = song.get_creators_profiles()
     return render_template('uploaded_songs.html', songs=songs)
 
 
@@ -172,7 +173,7 @@ def top_songs_by_genre():
         songs_json = [
             {
                 "name": song.get_name(),
-                "creators": ", ".join([creator.get_username() for creator in song.get_creators() if creator is not None]),
+                "creators": song.get_creators_profiles(),
                 "popularity": song.get_popularity()
             } for song in top_songs
         ]

@@ -66,12 +66,16 @@ $(document).ready(function() {
                 resultsDiv.empty();
                 data.forEach(song => {
                     let likeButtonHtml = song.liked ?
-                            `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
-                            `<button class="like-button" data-song-id="${song.id}">Like</button>`;
+                        `<button class="unlike-button" data-song-id="${song.id}">Unlike</button>` :
+                        `<button class="like-button" data-song-id="${song.id}">Like</button>`;
+                    let creatorsHtml = song.creators.map(creator =>
+                        `<a href="/profile/${creator.id}">${creator.username}</a>`
+                    ).join(', ');
+
                     resultsDiv.append(`
                         <tr>
                             <td>${song.name}</td>
-                            <td>${song.creators}</td>
+                            <td>${creatorsHtml}</td>
                             <td>${song.upload_date}</td>
                             <td>${song.popularity}</td>
                             <td>${song.filepath}</td>

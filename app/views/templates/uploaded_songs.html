@@ -60,7 +60,11 @@
                 {% for song in songs %}
                 <tr>
                     <td>{{ song.get_name() }}</td>
-                    <td>{{ song.creators }}</td>
+                    <td>
+                        {% for creator in song.creators %}
+                            <a href="{{ creator.url }}">{{ creator.username }}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ song.get_popularity() }}</td>
                     <td>{{ song.get_upload_date().strftime('%Y-%m-%d') }}</td>
                     <td>{{ song.get_file_path() }}</td>
