@@ -95,7 +95,7 @@ sqlite database for MVP Release)
 |   |   |-- forms.py
 |   |-- __init__.py
 |   |-- config.py
-|   |-- *database*.py
+|   |-- *database.sqlite*
 |-- run.py
 |-- requirements.txt
 
