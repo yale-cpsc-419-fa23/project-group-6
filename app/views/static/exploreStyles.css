@@ -134,18 +134,6 @@ tbody tr:hover {
     border-radius: 4px;
 }
 
-#genre-search-results p {
-    cursor: pointer;
-    color: #a8d1fb;
-}
-
-#genre-search-results p:hover {
-    text-decoration: underline;
-}
-
-#top-songs tr:nth-child(even), #top-songs-by-genre tr:nth-child(even) {
-    background-color: #454545;
-}
 
 .btn-secondary.btn-block {
     position: fixed;
