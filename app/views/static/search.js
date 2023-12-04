@@ -110,7 +110,6 @@ $(document).ready(function() {
                             <td>${creatorsHtml}</td>
                             <td>${song.upload_date}</td>
                             <td>${song.popularity}</td>
-                            <td>${song.filepath}</td>
                             <td>${likeButtonHtml}</td>
                         </tr>
                     `);

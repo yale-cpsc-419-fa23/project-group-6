@@ -32,7 +32,7 @@
 
     <div class="main-content">
         <h1>{{user.get_username()}}'s Profile</h1>
-        <p>A member since {{user.get_registered_date_time()}}</p>
+        <p>A member since {{user.get_registered_date_time().strftime('%Y-%m-%d')}}</p>
         {% if is_following %}
             <button class="follow unfollow-button" data-user-id="{{user.get_id()}}">Unfollow</button>
         {% else %}
