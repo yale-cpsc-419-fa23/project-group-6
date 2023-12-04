@@ -63,7 +63,7 @@ body {
 .flash-messages-container {
     width: 100%; 
     text-align: center; 
-    margin-top: 20px; /* Adjust this value as needed for spacing */
+    margin-top: 20px;
 }
 .flashes .alert {
     display: inline-block; 

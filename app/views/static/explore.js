@@ -40,7 +40,7 @@ $(document).ready(function() {
     function fetchTopSongsByGenre(genre) {
         $.get("/top-songs-by-genre", { genre: genre }, function(songs) {
             topSongsByGenreTable.empty();
-            genreResultsDiv.hide(); // Hide the genre list
+            genreResultsDiv.hide();
     
             if (songs && songs.length > 0) {
                 songs.forEach(song => {
