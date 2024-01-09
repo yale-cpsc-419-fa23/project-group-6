@@ -2,3 +2,4 @@ data/
 *.sqlite
 *.pyc
 *.DS_Store
+*.pem
