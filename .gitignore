@@ -1,5 +1,7 @@
 data/
 *.sqlite
+*.sql
+*.vscode
 *.pyc
 *.DS_Store
 *.pem
