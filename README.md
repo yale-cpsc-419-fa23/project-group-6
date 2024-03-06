@@ -43,7 +43,7 @@ cd project-group-6
 pip install -r requirements.txt
 ```
 
-To download the dataset, please refer to the DATABASE_SCHEMA.md file for instructions. After downloading the sqlite file and placing it in the app directory, the app is ready to run.
+To download the dataset, please refer to the [DATABASE_SCHEMA file](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/DATABASE_SCHEMA.md) for instructions. After downloading the sqlite file and placing it in the app directory, the app is ready to run.
 
 ## Usage
 
