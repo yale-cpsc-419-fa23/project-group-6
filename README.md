@@ -1,69 +1,49 @@
+<img src="app/views/static/img/logo.png" alt="Music Recommendation App Logo" width="200" height="200"/>
+
 # Music Recommendation App
 
-## Project Summary:
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![Project Timeline](https://img.shields.io/badge/project_timeline-latest-green)](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/RROJECT_TIMELINE.md)
+[![Database Schema](https://img.shields.io/badge/database_schema-latest-green)](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/DATABASE_SCHEMA.md)
+
+> A dynamic platform designed for music discovery and community building among users with similar music interests.
+
+## Table of Contents
+
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Team Members](#team-members)
+  
+## Background
 
 Our Music Recommendation App aims to create a dynamic platform where users can upload and edit their favorite tracks
 while also discovering new music tailored to their preferences. Further, it fosters community building by enabling users
 to connect with others having similar music interests. We look forward to bringing our vision to life through this
 project.
 
-## Team Members:
+## Install
 
-- Jiayi Chen
-- Kai Gao
-- Yue Quan
+To set up the Music Recommendation App, follow these steps:
 
-## Timeline:
+```bash
+git clone https://github.com/path/to/music_recommendation_app.git
+cd music_recommendation_app
+pip install -r requirements.txt
+```
 
-### 1. MVP Release (Due: Nov 3)
+## Usage
 
-- Basic three-tier architecture: data, application, and presentation tiers.
-- User registration and secure login.
-- Initial drag-and-drop music upload feature.
-- Homepage and simple search feature
+To run the Music Recommendation App:
 
-### 2. Alpha Version (Due: Nov 17)
+```bash
+python run.py
+```
 
-- Enhanced user profile features.
-- Metadata editing for track information.
-- Basic recommendation system initiation.
-- Genre exploration introduction.
+Navigate to the URL provided in the console to access the web application.
 
-### 3. Optional Deliverable: Recommendation System Enhancement (Due: Nov 26)
-
-- Optimization of the recommendation engine for faster and more accurate results.
-
-### 4. Beta Version (Due: Dec 1)
-
-- Fully functional music recommendation engine, equipped to produce daily mixes.
-- Introduction of the Like and Dislike system.
-- Introduction of the Collaborate features.
-- Integration of top played list based on popularity.
-
-### 5. Final Version (Due: Dec 5)
-
-- Rectification of bugs and glitches identified during the beta phase.
-- Enhancement of the front-end for smoother user experiences and more intuitive interfaces.
-- Strengthening of the back-end with database integrity checks and reliability measures.
-- Conducting extensive tests to ensure stability during novel user interactions.
-
-#### MISCELLANEOUS
-
-##### Database:
-
-1. User
-2. Song
-3. User-Song (Create)
-4. User-Song (Like)
-5. User-User (Follow)
-6. Song-Genre
-7. Genre
-
-Due to size constraints, we've stored our datasets on Google Drive. Access the datasets using your Yale
-account [at this link](https://drive.google.com/drive/folders/1Y0rKHs0sMmie-0wBxS__c0QH3HWUgug_?usp=sharing). (Uploaded
-sqlite database for MVP Release)
-
-##### Project Structure:
+## Project Structure
 
 ```
 /music_recommendation_mvc
@@ -98,5 +78,10 @@ sqlite database for MVP Release)
 |   |-- *database.sqlite*
 |-- run.py
 |-- requirements.txt
-
 ```
+
+## Team Members
+
+- Jiayi Chen
+- Kai Gao
+- Yue Quan

@@ -7,3 +7,4 @@ data/
 *.pem
 .venv*
 old_requirements.txt
+.DS_Store
