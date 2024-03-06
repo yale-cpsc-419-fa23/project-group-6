@@ -10,28 +10,40 @@
 
 ## Table of Contents
 
-- [Background](#background)
+- [Introduction](#introduction)
+- [Features](#features)
 - [Install](#install)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Team Members](#team-members)
   
-## Background
+## Introduction
 
 Our Music Recommendation App aims to create a dynamic platform where users can upload and edit their favorite tracks
 while also discovering new music tailored to their preferences. Further, it fosters community building by enabling users
 to connect with others having similar music interests. We look forward to bringing our vision to life through this
 project.
 
+## Features
+- User registration and secure login system
+- Drag-and-drop music upload functionality
+- Music recommendation engine for personalized suggestions
+- Like and Dislike system to refine recommendations
+- User profiles with track metadata editing
+- Community features such as Follow and Collaborate
+- Genre exploration for music discovery
+
 ## Install
 
 To set up the Music Recommendation App, follow these steps:
 
 ```bash
-git clone https://github.com/path/to/music_recommendation_app.git
-cd music_recommendation_app
+git clone https://github.com/yale-cpsc-419-fa23/project-group-6
+cd project-group-6
 pip install -r requirements.txt
 ```
+
+To download the dataset, please refer to the DATABASE_SCHEMA.md file for instructions. After downloading the sqlite file and placing it in the app directory, the app is ready to run.
 
 ## Usage
 
@@ -46,7 +58,7 @@ Navigate to the URL provided in the console to access the web application.
 ## Project Structure
 
 ```
-/music_recommendation_mvc
+/project-group-6
 |-- /app
 |   |-- /controllers
 |   |   |-- __init__.py
