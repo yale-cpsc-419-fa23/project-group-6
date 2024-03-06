@@ -3,7 +3,7 @@
 # Music Recommendation App
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-[![Project Timeline](https://img.shields.io/badge/project_timeline-latest-green)](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/RROJECT_TIMELINE.md)
+[![Project Timeline](https://img.shields.io/badge/project_timeline-latest-green)](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/PROJECT_TIMELINE.md)
 [![Database Schema](https://img.shields.io/badge/database_schema-latest-green)](https://github.com/yale-cpsc-419-fa23/project-group-6/blob/main/DATABASE_SCHEMA.md)
 
 > A dynamic platform designed for music discovery and community building among users with similar music interests.
